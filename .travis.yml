@@ -18,5 +18,6 @@ deploy:
     master: lucky13
     develop: temp-13-1
     travis: temp-13-2
+    mocha: temp-13-2
   on:
     repo: aframr/EmissaryWST
