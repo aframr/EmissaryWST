@@ -7,7 +7,6 @@ addons:
     access_key: fb844c65-3161-4d0f-a518-121c00d974a4
 before_script:
 - npm install -g gulp
-- istanbul cover _mocha server/test/*.js
 script: gulp
 notifications:
   slack: cse112lucky13:KZO7RAgO53DaVL2ej8rYGIzh
