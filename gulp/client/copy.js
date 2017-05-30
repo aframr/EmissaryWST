@@ -6,6 +6,11 @@ gulp.task('copy:assets', function () {
     .pipe(gulp.dest('./dist/assets'));
 });
 
+gulp.task('copy:sw', function () {
+  return gulp.src('./client/sw.js')
+    .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('copy:js', function () {
   return gulp.src('./client/assets/js/**/*.js')
      .pipe(gulp.dest('./dist/js'));
