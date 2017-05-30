@@ -6,7 +6,6 @@ var filesToCache = [
   '/assets/images/emissary.png',
   '/assets/css/neon.min.css',
   '/assets/css/font-icons/entypo/css/entypo.min.css',
-  '/assets/native/js/site.js',
   '/assets/js/jquery-1.11.3.min.js',
   '/assets/images/slide-img-1.png',
   '/assets/images/slide-img-2.png',
