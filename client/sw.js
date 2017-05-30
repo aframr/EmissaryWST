@@ -4,15 +4,9 @@ var filesToCache = [
   '/',
   //'/assets/views/index.html',
   '/assets/images/emissary.png',
-  '/assets/css/neon.min.css',
-  '/assets/css/font-icons/entypo/css/entypo.min.css',
-  '/assets/js/jquery-1.11.3.min.js',
   '/assets/images/slide-img-1.png',
   '/assets/images/slide-img-2.png',
-  '/assets/images/slide-img-3.png',
-  '/assets/images/logo@2x_165.png',
-  '/assets/images/slide-img-1-bg.png',
-  '/assets/images/logo@2x_100.png'
+  '/assets/images/slide-img-3.png'
 ];
 
 self.addEventListener('install', function(e) {
