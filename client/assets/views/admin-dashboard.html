@@ -199,6 +199,22 @@
 			});
 		
 			line_chart_demo.parent().attr('style', '');
+
+			//bar chart
+			new Morris.Bar({
+  				element: 'bar-chart-demo',
+  				data: [
+				    { y: '< 6', a: 15},
+				    { y: '6', a: 23},
+				    { y: '7', a: 20},
+				    { y: '8', a: 35},
+				    { y: '9', a: 43},
+				    { y: '10', a: 51}
+				],
+				xkey: 'y',
+				ykeys: ['a'],
+				labels: ['Visitors']
+			});
 		
 		
 			// Donut Chart
@@ -311,13 +327,13 @@
 		<div class="row">
 			<div class="col-sm-3 col-xs-6">
 		
-				<div class="tile-stats tile-red">
+				<a href="#line-chart-demo"><div class="tile-stats tile-red">
 					<div class="icon"><i class="entypo-users"></i></div>
 					<div id = "companyCount" class="num" data-start="83" data-end="83" data-postfix="" data-duration="1500" data-delay="0">23</div>
 		
-					<h3>Registered Users</h3>
+					<h3>Visitors</h3>
 					<p>Lifetime Total</p>
-				</div>
+				</div></a>
 		
 			</div>
 		
@@ -390,7 +406,7 @@
 			<div class="col-sm-3 col-xs-6">
 		
 				<div class="tile-stats tile-purple">
-					<div class="icon"><i class="entypo-chart-bar"></i></div>
+					<div class="icon"><i class="entypo-suitcase"></i></div>
 					<div id = "appointmentNumber" class="num" data-start="135" data-end="135" data-postfix="" data-duration="1500" data-delay="600">28
 						<!--<div class="mask-loading">
   							<div class="spinner">
@@ -408,7 +424,7 @@
 
 			<div class="col-sm-3 col-xs-6">
 		
-				<div class="tile-stats tile-orange">
+				<a href="#bar-chart-demo"><div class="tile-stats tile-orange">
 					<div class="icon"><i class="entypo-chart-bar"></i></div>
 					<div id = "convRate" class="num" data-start="135" data-end="135" data-postfix="" data-duration="1500" data-delay="600">8.7
 						<!--<div class="mask-loading">
@@ -421,7 +437,7 @@
 		
 					<h3>Service Rate</h3>
 					<p>Average Rate for Quality of Services</p>
-				</div>
+				</div></a>
 		
 			</div>
 
@@ -430,12 +446,11 @@
 		<br />
 
 		<div class="row">
-			<div class="col-sm-9">
+			<div class="col-sm-8">
 				<div id="line-chart-demo" style="height:200px"></div>
 		
 				<div class="panel panel-primary" style="width:500px">
 					<table class="table">
-						
 						<!--<thead>
 							<tr>
 								<th class="padding-bottom-none text-center">
@@ -462,9 +477,24 @@
 						</tbody>
 					</table>
 				</div>
-		
 			</div>
-		
+		</div>
+
+		<div class="row">
+			<div class="col-sm-8">
+				<div id="bar-chart-demo" style="height:200px"></div>
+				<div class="panel panel-primary" style="width:500px">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td class="panel-heading text-center">
+									<h4>Service Ratings(Past 6 Months)</h4>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 		
 		
