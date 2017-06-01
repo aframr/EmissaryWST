@@ -1,0 +1,58 @@
+15:31:31.720 INFO - Selenium build info: version: '3.4.0', revision: 'unknown'
+15:31:31.721 INFO - Launching a standalone Selenium Server
+2017-06-01 15:31:31.742:INFO::main: Logging initialized @250ms to org.seleniumhq.jetty9.util.log.StdErrLog
+15:31:31.797 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+15:31:31.798 INFO - Driver provider com.opera.core.systems.OperaDriver registration is skipped:
+Unable to create new instances on this machine.
+15:31:31.798 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+15:31:31.798 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
+15:31:31.799 INFO - Driver provider org.openqa.selenium.safari.SafariDriver registration is skipped:
+ registration capabilities Capabilities [{browserName=safari, version=, platform=MAC}] does not match the current platform WIN10
+2017-06-01 15:31:31.840:INFO:osjs.Server:main: jetty-9.4.3.v20170317
+2017-06-01 15:31:31.875:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@d8355a8{/,null,AVAILABLE}
+2017-06-01 15:31:32.017:INFO:osjs.AbstractConnector:main: Started ServerConnector@5f2108b5{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
+2017-06-01 15:31:32.018:INFO:osjs.Server:main: Started @525ms
+15:31:32.018 INFO - Selenium Server is up and running
+15:31:32.275 INFO - SessionCleaner initialized with insideBrowserTimeout 0 and clientGoneTimeout 1800000 polling every 180000
+15:31:32.302 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, name=Nwt1, browserName=chrome, javascriptEnabled=true, platform=ANY}]])
+15:31:32.314 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, name=Nwt1, browserName=chrome, javascriptEnabled=true, platform=ANY}]
+Starting ChromeDriver 2.29.461591 (62ebf098771772160f391d75e589dc567915b233) on port 22219
+Only local connections are allowed.
+15:31:34.767 INFO - Detected dialect: OSS
+15:31:34.785 INFO - Done: [new session: Capabilities [{acceptSslCerts=true, name=Nwt1, browserName=chrome, javascriptEnabled=true, platform=ANY}]]
+15:31:34.805 INFO - Executing: [get: https://lucky13-dev.herokuapp.com/])
+15:31:36.149 INFO - Done: [get: https://lucky13-dev.herokuapp.com/]
+15:31:36.159 INFO - Executing: [find elements: By.cssSelector: body])
+15:31:36.205 INFO - Done: [find elements: By.cssSelector: body]
+15:31:36.210 INFO - Executing: [is displayed: 0 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: body]])
+15:31:36.235 INFO - Done: [is displayed: 0 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: body]]
+15:31:36.242 INFO - Executing: [find element: By.cssSelector: a[href='login.html']])
+15:31:36.268 INFO - Done: [find element: By.cssSelector: a[href='login.html']]
+15:31:36.273 INFO - Executing: [click: 1 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: a[href='login.html']]])
+15:31:37.498 INFO - Done: [click: 1 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: a[href='login.html']]]
+15:31:37.505 INFO - Executing: [find elements: By.cssSelector: #username])
+15:31:37.532 INFO - Done: [find elements: By.cssSelector: #username]
+15:31:37.536 INFO - Executing: [is displayed: 2 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #username]])
+15:31:37.559 INFO - Done: [is displayed: 2 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #username]]
+15:31:38.068 INFO - Executing: [is displayed: 2 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #username]])
+15:31:38.103 INFO - Done: [is displayed: 2 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #username]]
+15:31:38.116 INFO - Executing: [find element: By.cssSelector: #username])
+15:31:38.187 INFO - Done: [find element: By.cssSelector: #username]
+15:31:38.202 INFO - Executing: [send keys: 2 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #username], [u, c, s, d, @, u, c, s, d, ., e, d, u]])
+15:31:38.490 INFO - Done: [send keys: 2 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #username], [u, c, s, d, @, u, c, s, d, ., e, d, u]]
+15:31:38.501 INFO - Executing: [find element: By.cssSelector: #password])
+15:31:38.566 INFO - Done: [find element: By.cssSelector: #password]
+15:31:38.581 INFO - Executing: [send keys: 3 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #password], [u, c, s, d]])
+15:31:38.769 INFO - Done: [send keys: 3 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #password], [u, c, s, d]]
+15:31:38.782 INFO - Executing: [find element: By.cssSelector: #loginButton])
+15:31:38.850 INFO - Done: [find element: By.cssSelector: #loginButton]
+15:31:38.859 INFO - Executing: [click: 4 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #loginButton]])
+15:31:39.067 INFO - Done: [click: 4 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #loginButton]]
+15:31:39.081 INFO - Executing: [find elements: By.cssSelector: #visitor-queue])
+15:31:39.147 INFO - Done: [find elements: By.cssSelector: #visitor-queue]
+15:31:39.661 INFO - Executing: [find elements: By.cssSelector: #visitor-queue])
+15:31:40.606 INFO - Done: [find elements: By.cssSelector: #visitor-queue]
+15:31:40.609 INFO - Executing: [is displayed: 5 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #visitor-queue]])
+15:31:40.635 INFO - Done: [is displayed: 5 [[ChromeDriver: chrome on XP (788a5f5e599a825bb461532d0f147d79)] -> css selector: #visitor-queue]]
+15:31:41.648 INFO - Executing: [delete session: 5a239bfc-cbe9-4ab1-bbf8-99c77a63da09])
+15:31:42.589 INFO - Done: [delete session: 5a239bfc-cbe9-4ab1-bbf8-99c77a63da09]
