@@ -16,14 +16,15 @@ var id = GetURLParameter('code');
 var name= GetURLParameter('status');
 
 if(id){
-	var clientSecret = "a56caa836b9f386c400a69cda6f5c0b4";
-	var clientID = "11293703667.22923580850";
+	var clientSecret = "1ef4af31fe4d6f3609efb4cfa3a1fc00";
+	var clientID = "167363484962.191718900406";
 	var something = {};
 	$.post("https://slack.com/api/oauth.access",
     {
         'client_id': clientID,
         'client_secret': clientSecret, 
-        'code':id
+        'code':id,
+        'redirect_uri': 'http://lucky13-dev.herokuapp.com/settings'
     },
     function(data, status){
         //alert("Data: " + data + "\nStatus: " + status);
