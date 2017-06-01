@@ -16,7 +16,6 @@
 			"webdriver.chrome.driver" : "./bin/chromedriver.exe"
     }
   },
-	
 
   "test_settings" : {
     "default" : {
