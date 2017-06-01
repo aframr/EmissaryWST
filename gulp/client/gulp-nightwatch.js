@@ -12,12 +12,14 @@ gulp.task('nightwatch:chrome', function() {
     }));
 });
 
+/**
 gulp.task('nightwatch:firefox', function() {
 	gulp.src('test/nightwatch_test/*.js')
     .pipe(nightwatch({
       configFile: 'nightwatch_ff.json'
     }));
 });
+(/
 
 /**
 gulp.task('nightwatch:basic', function() {

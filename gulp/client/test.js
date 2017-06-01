@@ -15,4 +15,4 @@ gulp.task('test:client', ['build:dev'], function(done){
   }, done);
 });
 
-gulp.task('nightwatch:test', ['nightwatch:chrome', 'nightwatch:firefox']);
+gulp.task('nightwatch:test', ['nightwatch:chrome']);
