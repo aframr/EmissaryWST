@@ -97,8 +97,9 @@ $(document).ready(() => {
     newAppt.provider_name = $('#appt-provider').val();
 
     userDate = $('#appt-date').val();
+    
     userTime = $('#appt-time').val();
-
+    
     newAppt.date = jsDate(userDate, userTime);
     return newAppt;
   }
@@ -123,16 +124,16 @@ $(document).ready(() => {
 
   function formatDate(date) {
     const d = new Date(Date.parse(date));
-    let mm = d.getMonth() + 1;
+   // let currentTime= new Date(currentTimeNotLocal);
+   //let currentTime = new Date(Date.parse(time));
+   /* let mm = d.getMonth() + 1;
     const yyyy = d.getFullYear();
-    let dd = d.getDate();
+    let dd = d.getDate();*/
+    const yyyy = date.substring(-1,4);
+    let mm = date.substring(5,7);
+    let dd = date.substring(8,10);
       // var monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug","Sep","Nov","Dec"];
-    if (dd < 10) {
-      dd = `0${dd}`;
-    }
-    if (mm < 10) {
-      mm = `0${mm}`;
-    }
+
       // console.log(monthArray[mm]);
     return `${mm}/${dd}/${+yyyy}`;
   }
@@ -196,11 +197,12 @@ $(document).ready(() => {
   function formatTime(time) {
     
     //console.log(currentTimeNotLocal);
-    let currentTimeNotLocal = time.toLocaleString();
-    let currentTime= new Date(Date.parse(currentTimeNotLocal));
+    let currentTime = new Date(Date.parse(time)).toUTCString();
+    var currentTimeArr = currentTime.split(" ");
+   // let currentTime= new Date(currentTimeNotLocal);
    //let currentTime = new Date(Date.parse(time));
-    let hour = currentTime.getHours();
-    let minute = currentTime.getMinutes();
+    let hour = currentTimeArr[4].substring(-1,2);
+    let minute = currentTimeArr[4].substring(3,5);
 
     if (minute < 10) {
       minute = `0${minute}`;
