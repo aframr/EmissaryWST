@@ -121,7 +121,7 @@ $(document).ready(function(){
     function compareDate(appointment){
       var today = new Date();
       appointment = new Date(Date.parse(appointment));
-
+      
       var appointmentDate = appointment.getFullYear() + ' ' + appointment.getDate() + ' ' + appointment.getMonth();
       var todayDate = today.getFullYear() + ' ' + today.getDate() + ' ' + today.getMonth();
 
@@ -167,7 +167,7 @@ $(document).ready(function(){
             currentTime = hour + ':' + minute +'PM';
         }
         else if(hour === 0){
-            currentTime = 1 + ':' + minute + 'AM';
+            currentTime = 12 + ':' + minute + 'AM';
         }
         else{
             currentTime = hour + ':' + minute +'AM';
