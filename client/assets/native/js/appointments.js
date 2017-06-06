@@ -99,8 +99,8 @@ $(document).ready(() => {
     userDate = $('#appt-date').val();
     
     userTime = $('#appt-time').val();
-    
-    newAppt.date = jsDate(userDate, userTime);
+    var inputDate = (new Date(jsDate(userDate, userTime)));
+    newAppt.date = inputDate.toISOString();
     return newAppt;
   }
 
@@ -204,9 +204,9 @@ $(document).ready(() => {
     let hour = currentTimeArr[4].substring(-1,2);
     let minute = currentTimeArr[4].substring(3,5);
 
-    if (minute < 10) {
+   /* if (minute < 10) {
       minute = `0${minute}`;
-    }
+    }*/
 
     if (hour >= 13) {
       hour -= 12;
