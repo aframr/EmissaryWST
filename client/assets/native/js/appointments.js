@@ -150,7 +150,7 @@ $(document).ready(() => {
 
     // FUNCTION TO FORMAT DATE TO JS FOR ROBOTS
   function reFormatDate(date) {
-    const d = new Date(Date.parse(date));
+    const d= new Date(Date.parse(date));
     let mm = d.getMonth() + 1;
     const yyyy = d.getFullYear();
     let dd = d.getDate();
@@ -188,14 +188,17 @@ $(document).ready(() => {
       }
       formattedTime = `${formattedHour + time.substr(colon, 3)}:00`;
     }
-
     return formattedTime;
   }
 
 
     // FUNCTION TO FORMAT TIME TO AM AND PM FOR HUMANS
   function formatTime(time) {
-    let currentTime = new Date(Date.parse(time));
+    
+    //console.log(currentTimeNotLocal);
+    let currentTimeNotLocal = time.toLocaleString();
+    let currentTime= new Date(Date.parse(currentTimeNotLocal));
+   //let currentTime = new Date(Date.parse(time));
     let hour = currentTime.getHours();
     let minute = currentTime.getMinutes();
 
@@ -209,7 +212,7 @@ $(document).ready(() => {
     } else if (hour === 12) {
       currentTime = `${hour}:${minute}PM`;
     } else if (hour === 0) {
-      currentTime = `${1}:${minute}AM`;
+      currentTime = `${12}:${minute}AM`;
     } else {
       currentTime = `${hour}:${minute}AM`;
     }
