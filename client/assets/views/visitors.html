@@ -23,7 +23,7 @@
 	<link rel="stylesheet" href="assets/css/custom.css">
 	<!--<link rel="stylesheet" href="assets/css/patient-queue.css"> FOR HOVER-->
 	<link rel="stylesheet" href="assets/native/css/visitors.css">
-	
+
 
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
 
@@ -146,7 +146,7 @@
 		<div class="visitor-container" >
         <div id="visitor-queue">
 
-           <h1 class="page-title">Visitors</h1>   
+           <h1 class="page-title">Visitors</h1>
 
 
         <table class="table">
@@ -178,7 +178,7 @@
                 <td class="patient-queue-text">{{this.last_name}}</td>
                 <td class="patient-queue-text appt-id">{{this.appointmentTime}}</td>
                 <td class="patient-queue-text"> {{this.checkin_time}}</td>
-          
+
 
                 <!-- Modal -->
             </tr>
@@ -245,5 +245,15 @@
 <script src="//static.getclicky.com/js" type="text/javascript"></script>
 <script type="text/javascript">try{ clicky.init(101051427); }catch(e){}</script>
 <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101051427ns.gif" /></p></noscript>
+
+<!--Segment-->
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+  analytics.load("lPGulSsKIYLisuhYCYObryPl7vNiDIeZ");
+  analytics.page();
+  }}();
+</script>
+
+
 </body>
 </html>
