@@ -124,21 +124,21 @@ $(document).ready(() => {
 
   function formatDate(date) {
     const d = new Date(Date.parse(date));
-   // let currentTime= new Date(currentTimeNotLocal);
-   //let currentTime = new Date(Date.parse(time));
-   /* let mm = d.getMonth() + 1;
+    let mm = d.getMonth() + 1;
     const yyyy = d.getFullYear();
-    let dd = d.getDate();*/
-    const yyyy = date.substring(-1,4);
-    let mm = date.substring(5,7);
-    let dd = date.substring(8,10);
+    let dd = d.getDate();
       // var monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug","Sep","Nov","Dec"];
-
+    if (dd < 10) {
+      dd = `0${dd}`;
+    }
+    if (mm < 10) {
+      mm = `0${mm}`;
+    }
       // console.log(monthArray[mm]);
     return `${mm}/${dd}/${+yyyy}`;
   }
   function formatNumber(number) {
-    return `(${number.substr(0, 3)})${number.substr(3, 3)}-${number.substr(6, 4)}`;
+return `(${number.substr(0, 3)})${number.substr(3, 3)}-${number.substr(6, 4)}`;
   }
 
     // FUNCTION TO FORMAT DATE OBJECT IN JS
@@ -197,16 +197,17 @@ $(document).ready(() => {
   function formatTime(time) {
     
     //console.log(currentTimeNotLocal);
-    let currentTime = new Date(Date.parse(time)).toUTCString();
-    var currentTimeArr = currentTime.split(" ");
+   // let currentTime = new Date(Date.parse(time)).toUTCString();
+   // var currentTimeArr = currentTime.split(" ");
    // let currentTime= new Date(currentTimeNotLocal);
-   //let currentTime = new Date(Date.parse(time));
-    let hour = currentTimeArr[4].substring(-1,2);
-    let minute = currentTimeArr[4].substring(3,5);
-
-   /* if (minute < 10) {
+   let currentTime = new Date(Date.parse(time));
+   // let hour = currentTimeArr[4].substring(-1,2);
+   // let minute = currentTimeArr[4].substring(3,5);
+   let hour = currentTime.getHours();
+   let minute = currentTime.getMinutes();
+    if (minute < 10) {
       minute = `0${minute}`;
-    }*/
+    }
 
     if (hour >= 13) {
       hour -= 12;
