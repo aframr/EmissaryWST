@@ -6,16 +6,27 @@ $(document).ready(() => {
 
     // Listener for Initial Sign up of an Employee
   $('#submit-btn').on('click', () => {
-    const employeeData = grabEmployeeData();
-    console.log(employeeData);
-    ajaxPost('/api/employees', employeeData);
+    const em = $('#form-employee-email').val();
+    if(validateEmployeeData(em)){
+      const employeeData = grabEmployeeData();
+      console.log(employeeData);
+      ajaxPost('/api/employees', employeeData);
+    }else{
+      location.reload();
+    }
   });
 
     // Listener for creating a company
   $('#submit-company-btn').on('click', () => {
-    const companyData = grabCompanyData();
-    console.log(companyData);
-    ajaxPost('/api/companies', companyData);
+    const em = $('#form-email').val();
+    if(validateCompanyInfo(em)){
+      const companyData = grabCompanyData();
+      console.log(companyData);
+      ajaxPost('/api/companies', companyData);
+    }
+    else{
+      location.reload();
+    }
   });
 
     // Grab Company Data from form
@@ -30,6 +41,7 @@ $(document).ready(() => {
     // Grab employee data from form
   function grabEmployeeData() {
     const employee = {};
+
     employee.first_name = $('#form-employee-first').val();
     employee.last_name = $('#form-employee-last').val();
     employee.email = $('#form-employee-email').val();
@@ -66,6 +78,30 @@ $(document).ready(() => {
         location.href = '/signup.html';
       },
     });
+  }
+
+  function validateCompanyInfo(email){
+    if(!validateEmail(email)){
+      alert('Invalid Email!');
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  function validateEmployeeData(email){
+    if(!validateEmail(email)){
+      alert('Invalid Employee Email!');
+      return false;      
+    }
+    //else if(!checkPassword(this)){
+    //  alert('Invalid password!');
+    //  return false;      
+    //}
+    else {
+      return true;
+    }
   }
 
   function validateCompany() {
