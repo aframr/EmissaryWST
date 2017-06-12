@@ -66,7 +66,8 @@
             <div class="row">
                 <div class="form-box">
 
-                    <form role="form" class="registration-form" onsubmit="return checkPassword(this);">
+                    <form role = "form" id="form" class="registration-form" >
+                        <!--onsubmit="return checkPassword(this);"-->
 
                         <fieldset>
                             <div class="form-top">
@@ -79,14 +80,24 @@
                                 <div class="form-group">
                                     <label class="sr-only" for="form-company-name">Company name</label>
                                     <input type="text" name="name" placeholder="Company Name" class="form-company-name form-control" id="form-company-name">
+                                    <label class="sr-only" for="form-company-name">Company name</label>
+                                </div>
+                                <div id="name-warning">
+                                    <label id="input-warning">Company name can not be blank</label>
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-email">Email</label>
                                     <input type="text" name="email" placeholder="Email" class="form-email form-control" id="form-email">
                                 </div>
+                                <div id="email-warning">
+                                    <label id="input-warning">please enter a valid email</label>
+                                </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-phone">Phone Number</label>
                                     <input type="text" name="phone_number" placeholder="Phone Number" class="form-phone form-control" id="form-phone">
+                                </div>
+                                <div id="number-warning">
+                                    <label id="input-warning">please enter a valid number</label>
                                 </div>
                                 <!--<div class="form-group">
                                     <label class="sr-only" for="form-card">Phone Number</label>
@@ -114,39 +125,53 @@
                                     <label class="sr-only" for="form-employee-first">First Name</label>
                                     <input type="text" name="first" placeholder="First Name" class="first form-control" id="form-employee-first">
                                 </div>
-                                <div class="form-group">
+                                <div id="employee-first-warning">
+                                    <label id="input-warning">first name can not be blank</label>
+                                </div>
+                                <div class="form-group" name>
                                     <label class="sr-only" for="form-employee-last">Last Name</label>
                                     <input type="text" name="last" placeholder="Last Name" class="form-control" id="form-employee-last">
+                                </div>
+                                <div id="employee-last-warning">
+                                    <label id="input-warning">last name can not be blank</label>
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-employee-email">Email</label>
                                     <input type="text" name="email" placeholder="Email" class="form-email form-control" id="form-employee-email">
                                 </div>
+                                <div id="employee-email-warning">
+                                    <label id="input-warning">invalid email address</label>
+                                </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-employee-phone">Phone Number</label>
                                     <input type="text" name="phone_number" placeholder="Phone Number" class="form-phone form-control" id="form-employee-phone">
                                 </div>
+                                <div id="employee-number-warning">
+                                    <label id="input-warning">invalid phone number</label>
+                                </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-password">Password</label>
                                     <input type="password" name="form-password" placeholder="Password" class="form-password form-control" id="form-password">
+                                </div>
+                                <div id="employee-password-warning">
+                                    <label id="input-warning">Please make sure your password has at least 6 characters including a lowercase, a uppercase, and a number</label>
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-repeat-password">Repeat password</label>
                                     <input type="password" name="form-repeat-password" placeholder="Confirm Password"
                                            class="form-repeat-password form-control" id="form-repeat-password">
                                 </div>
+                                <div id="employee-repeat-password-warning">
+                                    <label id="input-warning">Please comfirm your password is correct</label>
+                                </div>
                                 <button id="submit-btn" type="button" class="btn btn-next">Next</button>
                             </div>
                         </fieldset>
-
-
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 

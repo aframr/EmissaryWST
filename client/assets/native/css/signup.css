@@ -98,5 +98,14 @@ button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; bac
    padding-top: 50px !important;
 }
 
+#name-warning, #email-warning, #number-warning, #employee-first-warning, #employee-last-warning, 
+#employee-number-warning, #employee-email-warning, #employee-password-warning, #employee-repeat-password-warning{
+   display:none;  
+}
+
+#input-warning{
+   color: #f74141;
+   font-size: 14px;   
+}
 
 
