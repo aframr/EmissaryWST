@@ -8,7 +8,7 @@ var TextModel = require('../../notification/text');
 var VisitorList = require('../../models/VisitorList');
 var Employee = require('../../models/Employee');
 var Appointment = require('../../models/Appointment');
-
+var Company = require('../../models/Company');
 /* handles route for getting the Company's visitor list */
 exports.getCompanyVisitorListReq = function(req, res){
     var company_id=req.params.id;
@@ -152,13 +152,17 @@ exports.create = function(param, callback){
                     list = new VisitorList();
                     list.visitors=[];
                     list.company_id = company_id;
-                    console.log("in here");
                 }
                 list.visitors.push(visitor);
-                console.log(" here");
                 list.save(function(err){
                     if(err) return callback({error: "an error in saving"}, null);
-                    TextModel.sendText(first_name,last_name);
+                    var phoneToText
+                    //Get phone number of this company and text it with checkin notification
+                    Company.findById(company_id, function(err,user){
+                        phoneToText = user.phone_number;
+                        TextModel.sendText(first_name,last_name, user.phone_number);
+                    });
+                    
                     //return callback(null, list);
                     /*Employee.find({company : req.body.company_id},
                      function(err, employees) {
