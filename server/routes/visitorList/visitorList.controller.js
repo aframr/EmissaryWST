@@ -156,11 +156,9 @@ exports.create = function(param, callback){
                 list.visitors.push(visitor);
                 list.save(function(err){
                     if(err) return callback({error: "an error in saving"}, null);
-                    var phoneToText
-                    //Get phone number of this company and text it with checkin notification
                     Company.findById(company_id, function(err,user){
-                        phoneToText = user.phone_number;
                         TextModel.sendText(first_name,last_name, user.phone_number);
+                        console.log("Phone Number is: " + user.phone_number);
                     });
                     
                     //return callback(null, list);
