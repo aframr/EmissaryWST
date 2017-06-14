@@ -3,8 +3,8 @@
 <head>
 	<script>
 		var userState = JSON.parse(localStorage.getItem("userState"));
-  		if(userState != 2)
-    		location.href= "login.html";
+  		//if(userState != 2)
+    		//location.href= "login.html";
 	</script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -27,7 +27,11 @@
 	<link rel="stylesheet" href="./../assets/css/neon-theme.css">
 	<link rel="stylesheet" href="./../assets/css/neon-forms.css">
 	<link rel="stylesheet" href="./../assets/css/custom.css">
+	<link href="http://cdn.oesmith.co.uk/morris-0.4.1.min.css" rel="stylesheet" />
 	<script src="./../assets/js/jquery-1.11.3.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
 
 	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 	
@@ -112,7 +116,7 @@
 						<a href="#" id="company-name">
 							<h3>Admin Dashboard</h3>
 						</a>
-						<button id="auth-button" hidden>Authorize Google Analytics</button>
+						<button type="button" class="btn btn-primary" id="auth-button" >Authorize Google Analytics</button>
 					</li>
 		
 				</ul>
@@ -141,7 +145,6 @@
 		<script type="text/javascript">
 		jQuery(document).ready(function($)
 		{
-		
 			// Sparkline Charts
 			$('.inlinebar').sparkline('html', {type: 'bar', barColor: '#ff6264'} );
 			$('.inlinebar-2').sparkline('html', {type: 'bar', barColor: '#445982'} );
@@ -163,38 +166,55 @@
 		
 		
 			// JVector Maps
-			var map = $("#map");
+			/*var map = $("#map");
 		
 			map.vectorMap({
 				map: 'europe_merc_en',
 				zoomMin: '3',
 				backgroundColor: '#383f47',
 				focusOn: { x: 0.5, y: 0.8, scale: 3 }
-			});
+			});*/
 		
 		
 		
 			// Line Charts
 			var line_chart_demo = $("#line-chart-demo");
 		
-			var line_chart = Morris.Line({
+			//var line_chart =
+			new Morris.Line({
 				element: 'line-chart-demo',
 				data: [
-					{ y: '2006', a: 100, b: 90 },
-					{ y: '2007', a: 75,  b: 65 },
-					{ y: '2008', a: 50,  b: 40 },
-					{ y: '2009', a: 75,  b: 65 },
-					{ y: '2010', a: 50,  b: 40 },
-					{ y: '2011', a: 75,  b: 65 },
-					{ y: '2012', a: 100, b: 90 }
+					{ y: '2016-10', a: 50 },
+					{ y: '2016-11', a: 10 },
+					{ y: '2016-12', a: 35 },
+					{ y: '2017-01', a: 22 },
+					{ y: '2017-02', a: 42 },
+					{ y: '2017-03', a: 21 },
+					{ y: '2017-04', a: 32 }
 				],
 				xkey: 'y',
-				ykeys: ['a', 'b'],
-				labels: ['October 2013', 'November 2013'],
-				redraw: true
+				ykeys: ['a'],
+				labels: ['New Users']
+				//redraw: true
 			});
 		
 			line_chart_demo.parent().attr('style', '');
+
+			//bar chart
+			new Morris.Bar({
+  				element: 'bar-chart-demo',
+  				data: [
+				    { y: '< 6', a: 15},
+				    { y: '6', a: 23},
+				    { y: '7', a: 20},
+				    { y: '8', a: 35},
+				    { y: '9', a: 43},
+				    { y: '10', a: 51}
+				],
+				xkey: 'y',
+				ykeys: ['a'],
+				labels: ['Visitors']
+			});
 		
 		
 			// Donut Chart
@@ -307,13 +327,13 @@
 		<div class="row">
 			<div class="col-sm-3 col-xs-6">
 		
-				<div class="tile-stats tile-red">
+				<a href="#line-chart-demo"><div class="tile-stats tile-red">
 					<div class="icon"><i class="entypo-users"></i></div>
-					<div id = "companyCount" class="num" data-start="83" data-end="83" data-postfix="" data-duration="1500" data-delay="0">0</div>
+					<div id = "companyCount" class="num" data-start="83" data-end="83" data-postfix="" data-duration="1500" data-delay="0">23</div>
 		
-					<h3>Registered Users</h3>
+					<h3>Companies</h3>
 					<p>Lifetime Total</p>
-				</div>
+				</div></a>
 		
 			</div>
 		
@@ -342,13 +362,13 @@
 		
 				<div class="tile-stats tile-aqua">
 					<div class="icon"><i class="entypo-mail"></i></div>
-					<div id = "eventCount" class="num" data-start="23" data-end="23" data-postfix="" data-duration="1500" data-delay="1200">
-						 <div class="mask-loading">
+					<div id = "eventCount" class="num" data-start="23" data-end="23" data-postfix="" data-duration="1500" data-delay="1200">153
+						 <!--<div class="mask-loading">
  							 <div class="spinner">
     							<div class="double-bounce1"></div>
     							<div class="double-bounce2"></div>
  						 	</div>
-						</div>
+						</div>-->
 					</div>
 		
 					<h3>Number of Logins</h3>
@@ -385,56 +405,99 @@
 		<div class="row">
 			<div class="col-sm-3 col-xs-6">
 		
-				<div class="tile-stats tile-orange">
-					<div class="icon"><i class="entypo-chart-bar"></i></div>
-					<div id = "convRate" class="num" data-start="135" data-end="135" data-postfix="" data-duration="1500" data-delay="600">
-						<div class="mask-loading">
+				<div class="tile-stats tile-purple">
+					<div class="icon"><i class="entypo-suitcase"></i></div>
+					<div id = "appointmentNumber" class="num" data-start="135" data-end="135" data-postfix="" data-duration="1500" data-delay="600">28
+						<!--<div class="mask-loading">
   							<div class="spinner">
     						<div class="double-bounce1"></div>
     						<div class="double-bounce2"></div>
   							</div>
-						</div>
+						</div>-->
 					</div>
 		
-					<h3>Conversion Rate</h3>
-					<p># of Signups/ # of Unique Landing Page Views</p>
+					<h3>Appintments</h3>
+					<p>Number of Appointments made in the past 7 days</p>
 				</div>
 		
 			</div>
-			<div class="col-sm-9">
+
+			<div class="col-sm-3 col-xs-6">
 		
-				<div class="panel panel-primary">
+				<a href="#bar-chart-demo"><div class="tile-stats tile-orange">
+					<div class="icon"><i class="entypo-chart-bar"></i></div>
+					<div id = "convRate" class="num" data-start="135" data-end="135" data-postfix="" data-duration="1500" data-delay="600">8.7
+						<!--<div class="mask-loading">
+  							<div class="spinner">
+    						<div class="double-bounce1"></div>
+    						<div class="double-bounce2"></div>
+  							</div>
+						</div>-->
+					</div>
+		
+					<h3>Service Rate</h3>
+					<p>Average Rate for Quality of Services</p>
+				</div></a>
+		
+			</div>
+
+		</div>
+		<br />
+		<br />
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div id="line-chart-demo" style="height:200px"></div>
+		
+				<div class="panel panel-primary" style="width:500px">
 					<table class="table">
-						<thead>
+						<!--<thead>
 							<tr>
 								<th class="padding-bottom-none text-center">
 									<br />
 									<br />
 									<div class="mask-loading2">
-  							<div class="spinner2">
-    						<div class="double-bounce3"></div>
-    						<div class="double-bounce4"></div>
-  							</div>
-						</div>
+			  							<div class="spinner2">
+				    						<div class="double-bounce3"></div>
+				    						<div class="double-bounce4"></div>
+			  							</div>
+									</div>
+									
 									<span class="monthly-sales"></span>
 								</th>
 							</tr>
-						</thead>
+						</thead>-->
 						<tbody>
+							
 							<tr>
 								<td class="panel-heading text-center">
-									<h4>New Visitors On the Site Per Day (Past 60 Days)</h4>
+									<h4>New Companies On the Site Per Day (Past 6 Months)</h4>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-		
 			</div>
-		
-			
-		
 		</div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div id="bar-chart-demo" style="height:200px"></div>
+				<div class="panel panel-primary" style="width:500px">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td class="panel-heading text-center">
+									<h4>Service Ratings (Past 6 Months)</h4>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		
 		
 		<br />
 		
