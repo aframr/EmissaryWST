@@ -16,8 +16,17 @@
 <form class = "check-in">
     <h1>Check in</h1>
     <input class = "visitor-fields" id="visitor-first" type = "text" name = "first" placeholder = "First"> <br>
+    <div id="visitor-first-warning">
+        <label id="input-warning">First name can not be blank</label>
+    </div>
     <input class = "visitor-fields" id="visitor-last" type = "text" name = "last" placeholder = "Last"> <br>
+    <div id="visitor-last-warning">
+        <label id="input-warning">Last name can not be blank</label>
+    </div>
     <input class = "visitor-fields" id="visitor-number" type = "text" name = "phoneNumber" placeholder = "Phone Number">
+    <div id="visitor-number-warning">
+        <label id="input-warning">Invalid phone number</label>
+    </div>
     <br>
     <input class = "submit-check-in" type="submit" value="Submit">
 </form>
