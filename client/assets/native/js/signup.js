@@ -24,7 +24,7 @@ $(document).ready(() => {
       console.log(employeeData);
       ajaxPost('/api/employees', employeeData);
     }else{
-      //location.reload();
+      location.reload();
     }
   });
 
