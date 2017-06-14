@@ -1212,7 +1212,7 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary {
   color: #fff;
   background-color: #e8a300;
-  border-color: #252a32;
+  border-color: #e8a300;
 }
 .btn-primary:focus,
 .btn-primary.focus {
