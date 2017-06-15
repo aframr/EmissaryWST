@@ -157,6 +157,8 @@ server.listen(app.get('port'), function() {
 var server = socketIO.createServer(io);
 
 
+app.use('/apidoc', express.static(path.join(__dirname, 'apidoc')));
+
 
 
 module.exports = app;
