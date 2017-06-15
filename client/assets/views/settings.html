@@ -9,9 +9,9 @@
     <meta name="description" content="Neon Admin Panel" />
     <meta name="author" content="" />
 
-    <link rel="icon" href="assets/images/logo-emissary.png">
+    <link rel="icon" href="assets/images/iconChicken.png">
 
-    <title>Emissary | Settings</title>
+    <title>CHEK'N | Settings</title>
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="assets/native/css/shared-dashboard.css">
     <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
@@ -51,7 +51,7 @@
                 <!-- logo -->
                 <div class="logo">
                     <a href="visitors.html">
-                        <img src="assets/images/emissary.png" width="150" alt="" />
+                        <img src="assets/images/NEWLOGO.png" width="150" alt="" />
                     </a>
                 </div>
 
@@ -100,11 +100,17 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/admin-dashboard.html">
+                        <i class="entypo-layout"></i>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
                     <a href="#">
                         <i class="entypo-tools"></i>
                         <span class="title">Settings</span>
                     </a>
-                </li>
+                </li> 
             </ul>
 
         </div>
@@ -139,15 +145,12 @@
             <div class="col-md-6 col-sm-4 clearfix hidden-xs">
 
                 <ul class="list-inline links-list pull-right">
-                    <div class="dropdown">
-                        <i class="fa fa-3x fa-cog dropdown-toggle" data-toggle="dropdown"></i>
-                        <ul class="dropdown-menu">
-                            <li><a href="/checkin.html">Check-In</a></li>
-                            <li><a id="logoutButton" href="/index.html">
-                                Log Out <i class="entypo-logout right"></i></a>
-                            </li>
-                        </ul>
-                  </div>
+                    <a href="/checkin.html">
+                        <button class = "btn btn-primary btn-lg" >Check In</button>
+                    </a>
+                    <a href="/index.html">                  
+                        <button class = "btn btn-primary btn-lg">Log Out</button>
+                    </a>
                 </ul>
 
             </div>
@@ -279,7 +282,7 @@
         </form>
 
         <h2>Get Check-In Notifications Via Slack</h2>
-        <a href="https://slack.com/oauth/authorize?scope=incoming-webhook,bot,chat:write:bot&client_id=11293703667.22923580850"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+        <a href="https://slack.com/oauth/authorize?scope=incoming-webhook,bot,chat:write:bot&client_id=167363484962.191718900406&redirect_uri=http://lucky13-dev.herokuapp.com/settings"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
     </div>
 </div>
 <!-- Imported styles on this page -->
