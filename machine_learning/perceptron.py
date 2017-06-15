@@ -139,7 +139,6 @@ class Perceptron(object):
             print "==================================="
 
             p.train()
-            # problem 1
             for p_type in range(len(P_TYPES)):
                 print "%s Perceptron:" % P_TYPES_STR[p_type]
                 for f in [TRAINING_FILE, TEST_FILE]:
@@ -195,7 +194,7 @@ def main():
     # use this for testing your perceptron
     Perceptron.binary_classifiers(1, 2, 3)
 
-    # use this to find 
+    # use this to find associations with appointment absence
     Perceptron.binary_classifiers_k_strongest(1, [2], 3, 3)
 
 

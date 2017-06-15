@@ -3,4 +3,40 @@ README
 This is a POC for utilizing machine learning on appointment data to optimize
 reminder channels, times, etc.
 
+Please read up on the perceptron algorithm for more technical details:
+https://en.wikipedia.org/wiki/Perceptron
 
+Quick note: for machine learning, typically 90% of your data should be placed
+into training, and 10% into testing (what is actually used to make predictions)
+
+Input files:
+train.txt and test.txt:
+Format of the file:
+Each row should represent one appointment data point
+Each column correlates with a row from dict.txt. In the example case given, 
+dict.txt contains words in a blog post, and in train.txt and test.txt each
+column indicates the word count of a given word. For appointment data, 
+dict.txt should contain different features of a given appointment,
+such as whether a reminder was sent, through which channel(s), time prior
+to appointment the reminder was sent, and anything else.
+The final column for the appointment data should be either 0 or 1, where
+0 indicates absence, 1 indicates presence at appointment. This is the
+"negative" and "positive" label.
+
+dict.txt:
+Each row should have the name of the feature of an appointment, corresponding
+to the columns of train.txt and test.txt. 
+
+So in the end, if dict.txt is n rows long, (for n features of any given 
+appointment), then train.txt and test.txt will have n+1 columns (n features,
+with its value (such as, 2 for 2 hour prior reminder), and the last column
+will be either 0 or 1 for whether in the end the person showed up.
+
+Perceptron.binary_classifiers(1, 0, 3) should then be used to test the classifier
+(where 1 is the positive label, 0 is negative label, and the perceptron is run
+3 times).
+
+Perceptron.binary_classifiers_k_strongest(1, [0], 3, 5) should be used to show
+the top 5 features correlating with appointment show and top 5 features 
+correlating with appointment absence, on a perceptron trained with 3 passes,
+with positive label 1 and negative label 0.
