@@ -1,111 +1,146 @@
-$(document).ready(function(){
+$(document).ready(() => {
+  const socket = io();
 
-    var socket = io();
+  const VALIDATE_COMPANY_ID = 'validate_company_id';
+  const ADD_VISITOR = 'add_visitor';
 
-    var VALIDATE_COMPANY_ID = "validate_company_id";
-    var ADD_VISITOR = "add_visitor";
+  const companyData = JSON.parse(localStorage.getItem('currentCompany'));
+  console.log(companyData);
+  socket.emit(VALIDATE_COMPANY_ID, companyData);
+
+    // Prevent users from scrolling around on iPad
+  document.ontouchmove = function (e) {
+    e.preventDefault();
+  };
+
+    // Bind Listeners
+  $('#tap-to-check').on('click', startCheckIn);
+  $('.check-in').on('submit', submitForm);
+
+    // When a user starts their check in
+  function startCheckIn() {
+    $('.check-in').addClass('show');
+    $('.check-in').animate({
+      top: '10%',
+      opacity: '1',
+    }, 700);
+    $(this).addClass('hide');
+    $('#clock').addClass('hide');
+  }
+
+  document.getElementById("visitor-first").addEventListener("change", visitorFirstWatcher);
+  document.getElementById("visitor-last").addEventListener("change", visitorLastWatcher);
+  document.getElementById("visitor-number").addEventListener("change", visitorPhoneWatcher);
+  function visitorPhoneWatcher() {
+    const number = $('#visitor-number').val();
     
-    var companyData = JSON.parse(localStorage.getItem("currentCompany"));
-    console.log(companyData);
-    socket.emit(VALIDATE_COMPANY_ID, companyData);
-    
-    //Prevent users from scrolling around on iPad
-    document.ontouchmove = function(e) {
-        e.preventDefault();
-    };
+    if (!validateNumber(number)){
+      $('#visitor-number-warning').show();
+    } else{
+      $('#visitor-number-warning').hide();
+    }   
+  }
+    function visitorFirstWatcher() {
+    const first = $('#visitor-first').val();
 
-    //Bind Listeners
-    $('#tap-to-check').on('click', startCheckIn);
-    $('.check-in').on('submit', submitForm);
-
-    //When a user starts their check in
-    function startCheckIn(){
-        $('.check-in').addClass('show');
-        $('.check-in').animate({
-            top:'10%',
-            opacity: '1'
-        }, 700);
-        $(this).addClass('hide');
-        $('#clock').addClass('hide');
+    if (first == '') {
+      $('#visitor-first-warning').show();      
+    }else{
+      $('#visitor-first-warning').hide();
     }
+  }
 
-    //When a patient submits their form
-    function submitForm(){
-        //event.preventDefault();
-        var data = grabFormElements();
-        //console.log(data.company_id);
-        if(localStorage.getItem("slackToken")&&localStorage.getItem("slackChannel"))
-        {
-             $.post("https://slack.com/api/chat.postMessage",
-             {
-                'token': localStorage.getItem("slackToken"),
-                'channel': localStorage.getItem("slackChannel"), 
-                'text': "Name: " + data['first_name'] + " " + data['last_name'] + " Phone Number: " + data['phone_number']
-             },
-             function(data, status){
-              });
-        }
-        socket.emit(ADD_VISITOR, data);
+  function visitorLastWatcher() {
+    const last = $('#visitor-last').val();    
 
-        $(this).animate({
-            top:'35%',
-            opacity:'0'
-        },0);
-
+    if (last == '') {
+      $('#visitor-last-warning').show();      
+    }else{
+      $('#visitor-last-warning').hide();
     }
-    //Grabs elements from the check in and puts it into an object
-    function grabFormElements(){
-        var newVisitor = {};
-        newVisitor.company_id = companyData._id;
-        newVisitor.first_name= $('#visitor-first').val();
-        newVisitor.last_name = $('#visitor-last').val();
-        newVisitor.phone_number = $('#visitor-number').val();
-        newVisitor.checkin_time = new Date();
-        return newVisitor;
-    }
+  }
 
-    //CLOCK
-    function updateClock () {
-        var currentTime = new Date ( );
-        var currentHours = currentTime.getHours ( );
-        var currentMinutes = currentTime.getMinutes ( );
-        //var currentSeconds = currentTime.getSeconds ( );
+  function validateNumber(number) {
+    const re = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+    return re.test(number);
+  }
+
+    // When a patient submits their form
+  function submitForm() {
+    const number = $('#visitor-number').val();
+    if(validateNumber(number)){
+          // event.preventDefault();
+      const data = grabFormElements();
+          // console.log(data.company_id);
+      if (localStorage.getItem('slackToken') && localStorage.getItem('slackChannel')) {
+        $.post('https://slack.com/api/chat.postMessage',
+          {
+            token: localStorage.getItem('slackToken'),
+            channel: localStorage.getItem('slackChannel'),
+            text: `Name: ${data.first_name} ${data.last_name} Phone Number: ${data.phone_number}`,
+          },
+               (data, status) => {
+               });
+      }
+      socket.emit(ADD_VISITOR, data);
+
+      $(this).animate({
+        top: '35%',
+        opacity: '0',
+      }, 0);
+    }
+    else{
+      location.reload();     
+    }
+  }
+    // Grabs elements from the check in and puts it into an object
+  function grabFormElements() {
+    const newVisitor = {};
+    newVisitor.company_id = companyData._id;
+    newVisitor.first_name = $('#visitor-first').val();
+    newVisitor.last_name = $('#visitor-last').val();
+    newVisitor.phone_number = $('#visitor-number').val();
+    newVisitor.checkin_time = new Date();
+    return newVisitor;
+  }
+
+    // CLOCK
+  function updateClock() {
+    const currentTime = new Date();
+    let currentHours = currentTime.getHours();
+    let currentMinutes = currentTime.getMinutes();
+        // var currentSeconds = currentTime.getSeconds ( );
         // Pad the minutes and seconds with leading zeros, if required
-        currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
-        //currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+    currentMinutes = (currentMinutes < 10 ? '0' : '') + currentMinutes;
+        // currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
 
         // Convert the hours component to 12-hour format if needed
-        currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+    currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
 
         // Convert an hours component of "0" to "12"
-        currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+    currentHours = (currentHours == 0) ? 12 : currentHours;
 
         // Compose the string for display
-        var currentTimeString = currentHours + ":" + currentMinutes;
+    const currentTimeString = `${currentHours}:${currentMinutes}`;
 
-        $("#clock").html(currentTimeString);
-    }
-    updateClock();
-    setInterval(updateClock, 60 * 1000);
+    $('#clock').html(currentTimeString);
+  }
+  updateClock();
+  setInterval(updateClock, 60 * 1000);
 
-    /***
+    /** *
      * Find a specific cookie name
      * @param cName
      * @returns {string|*}
      */
-    function getCookie(cName) {
-        var name = cName + '=';
-        var cookieArray = document.cookie.split(';');
+  function getCookie(cName) {
+    const name = `${cName}=`;
+    const cookieArray = document.cookie.split(';');
 
-        for (var i = 0, len = cookieArray.length; i < len; i++) {
-            var cookie = cookieArray[i];
-            while (cookie.charAt(0) == ' ')
-                cookie.substring(1);
-            if (cookie.indexOf(name) == 0)
-                return cookie.substring(name.length, cookie.length);
-        }
-
+    for (let i = 0, len = cookieArray.length; i < len; i++) {
+      const cookie = cookieArray[i];
+      while (cookie.charAt(0) == ' ') { cookie.substring(1); }
+      if (cookie.indexOf(name) == 0) { return cookie.substring(name.length, cookie.length); }
     }
-
-
+  }
 });

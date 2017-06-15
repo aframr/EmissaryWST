@@ -5412,7 +5412,7 @@ body {
 .page-container .sidebar-menu {
   display: table-cell;
   vertical-align: top;
-  background: #303641;
+  background: #e87b00;
   width: 280px;
   position: relative;
   z-index: 100;
@@ -5466,7 +5466,7 @@ body {
 }
 .page-container .sidebar-menu .logo-env > div > a {
   display: inline-block;
-  color: #aaabae;
+  color: #565b63;
 }
 .page-container .sidebar-menu .logo-env > div.sidebar-collapse,
 .page-container .sidebar-menu .logo-env > div.sidebar-mobile-menu {
@@ -5476,7 +5476,7 @@ body {
 .page-container .sidebar-menu .logo-env > div.sidebar-collapse a,
 .page-container .sidebar-menu .logo-env > div.sidebar-mobile-menu a {
   display: inline-block;
-  border: 1px solid #454a54;
+  border: 1px solid #565b63;
   text-align: center;
   padding: 0;
   line-height: 1;
@@ -5572,7 +5572,7 @@ body {
   position: relative;
   display: block;
   padding: 10px 20px;
-  color: #aaabae;
+  color: #521919;
   z-index: 2;
   -webkit-transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
   -moz-transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
