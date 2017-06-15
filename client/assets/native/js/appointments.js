@@ -2,7 +2,7 @@ $(document).ready(() => {
   const companyData = JSON.parse(localStorage.getItem('currentCompany'));
   const myCompanyId = companyData._id;
   const curUser = JSON.parse(localStorage.getItem('currentUser'));
-
+  
 
   $('#user-name').text(`${curUser.first_name} ${curUser.last_name}`);
 
@@ -95,11 +95,13 @@ $(document).ready(() => {
     newAppt.last_name = $('#appt-last').val();
     newAppt.phone_number = $('#appt-number').val();
     newAppt.provider_name = $('#appt-provider').val();
-
+    newAppt.company_name = curUser.company_name;
     userDate = $('#appt-date').val();
+    
     userTime = $('#appt-time').val();
+    var inputDate = (new Date(jsDate(userDate, userTime)));
+    newAppt.date = inputDate.toISOString();
 
-    newAppt.date = jsDate(userDate, userTime);
     return newAppt;
   }
 
@@ -137,7 +139,7 @@ $(document).ready(() => {
     return `${mm}/${dd}/${+yyyy}`;
   }
   function formatNumber(number) {
-    return `(${number.substr(0, 3)})${number.substr(3, 3)}-${number.substr(6, 4)}`;
+return `(${number.substr(0, 3)})${number.substr(3, 3)}-${number.substr(6, 4)}`;
   }
 
     // FUNCTION TO FORMAT DATE OBJECT IN JS
@@ -150,7 +152,7 @@ $(document).ready(() => {
 
     // FUNCTION TO FORMAT DATE TO JS FOR ROBOTS
   function reFormatDate(date) {
-    const d = new Date(Date.parse(date));
+    const d= new Date(Date.parse(date));
     let mm = d.getMonth() + 1;
     const yyyy = d.getFullYear();
     let dd = d.getDate();
@@ -188,17 +190,22 @@ $(document).ready(() => {
       }
       formattedTime = `${formattedHour + time.substr(colon, 3)}:00`;
     }
-
     return formattedTime;
   }
 
 
     // FUNCTION TO FORMAT TIME TO AM AND PM FOR HUMANS
   function formatTime(time) {
-    let currentTime = new Date(Date.parse(time));
-    let hour = currentTime.getHours();
-    let minute = currentTime.getMinutes();
-
+    
+    //console.log(currentTimeNotLocal);
+   // let currentTime = new Date(Date.parse(time)).toUTCString();
+   // var currentTimeArr = currentTime.split(" ");
+   // let currentTime= new Date(currentTimeNotLocal);
+   let currentTime = new Date(Date.parse(time));
+   // let hour = currentTimeArr[4].substring(-1,2);
+   // let minute = currentTimeArr[4].substring(3,5);
+   let hour = currentTime.getHours();
+   let minute = currentTime.getMinutes();
     if (minute < 10) {
       minute = `0${minute}`;
     }
@@ -209,7 +216,7 @@ $(document).ready(() => {
     } else if (hour === 12) {
       currentTime = `${hour}:${minute}PM`;
     } else if (hour === 0) {
-      currentTime = `${1}:${minute}AM`;
+      currentTime = `${12}:${minute}AM`;
     } else {
       currentTime = `${hour}:${minute}AM`;
     }
