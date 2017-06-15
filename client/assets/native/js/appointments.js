@@ -2,7 +2,7 @@ $(document).ready(() => {
   const companyData = JSON.parse(localStorage.getItem('currentCompany'));
   const myCompanyId = companyData._id;
   const curUser = JSON.parse(localStorage.getItem('currentUser'));
-
+  
 
   $('#user-name').text(`${curUser.first_name} ${curUser.last_name}`);
 
@@ -95,12 +95,13 @@ $(document).ready(() => {
     newAppt.last_name = $('#appt-last').val();
     newAppt.phone_number = $('#appt-number').val();
     newAppt.provider_name = $('#appt-provider').val();
-
+    newAppt.company_name = curUser.company_name;
     userDate = $('#appt-date').val();
     
     userTime = $('#appt-time').val();
     var inputDate = (new Date(jsDate(userDate, userTime)));
     newAppt.date = inputDate.toISOString();
+
     return newAppt;
   }
 
@@ -145,7 +146,7 @@ return `(${number.substr(0, 3)})${number.substr(3, 3)}-${number.substr(6, 4)}`;
   function jsDate(date, time) {
     const jsDate = reFormatDate(date);
     const jsTime = reFormatTime(time);
-    jsDateObj = `${jsDate} ${jsTime}`;
+    const jsDateObj = `${jsDate} ${jsTime}`;
     return jsDateObj;
   }
 

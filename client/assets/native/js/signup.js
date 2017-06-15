@@ -28,10 +28,12 @@ $(document).ready(() => {
     }
   });
 
+  var company_Name;
     // Grab Company Data from form
   function grabCompanyData() {
     const company = {};
-    company.name = $('#form-company-name').val();
+    company_Name = $('#form-company-name').val();
+    company.name = company_Name;
     company.email = $('#form-email').val();
     company.phone_number = $('#form-phone').val();
     return company;
@@ -48,6 +50,7 @@ $(document).ready(() => {
     employee.phone_number = $('#form-employee-phone').val();
     employee.role = 'c_admin';
     employee.company_id = companyId;
+    employee.company_name =  company_Name;
     return employee;
   }
 
