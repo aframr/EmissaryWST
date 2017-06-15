@@ -204,6 +204,8 @@ app.post('/hook', function (req, res) {
 // TODO: add given information to database or extract from database
 function handleReservation(request) {
     params = request.result.parameters;
+    console.log('request = ',request);
+    console.log('params = ',params);
     sess_id = request.id;
     response = "";
 
