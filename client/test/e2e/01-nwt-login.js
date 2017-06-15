@@ -8,7 +8,7 @@ module.exports = {
       .waitForElementVisible('body', 5000)
       .click("a[href='login.html']")
       .waitForElementVisible('#username', 5000)
-			.setValue('#username', 'temp8@ucsd.edu')
+			.setValue('#username', 'johndoe@ucsd.edu')
 			.setValue('#password', 'Aa123123')
 			.click('#loginButton')
 			.waitForElementVisible('#visitor-queue', 5000)
