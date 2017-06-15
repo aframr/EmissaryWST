@@ -18,3 +18,5 @@ exclude_paths:
 - dist/**/*
 - node_modules/**/*
 - client/bower_components/**/*
+- gulp/**/*.js
+- apidoc/**/*

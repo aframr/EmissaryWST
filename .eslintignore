@@ -8,3 +8,5 @@ client/*
 !client/assets/native/**/*.css
 
 dist/*
+gulp/*
+apidoc/*
