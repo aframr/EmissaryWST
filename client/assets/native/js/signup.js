@@ -261,18 +261,18 @@ $(document).ready(() => {
       console.log('Error: Password must be different from last name!');
       return false;
     }      
-    re = /[0-9]/;
-    if (!re.test(employeePassword)) {
+    const re1 = /[0-9]/;
+    if (!re1.test(employeePassword)) {
       console.log('Error: password must contain at least one number (0-9)!');
       return false;
     }
-    re = /[a-z]/;
-    if (!re.test(employeePassword)) {
+    const re2 = /[a-z]/;
+    if (!re2.test(employeePassword)) {
       console.log('Error: password must contain at least one lowercase letter (a-z)!');
       return false;
     }
-    re = /[A-Z]/;
-    if (!re.test(employeePassword)) {
+    const re3 = /[A-Z]/;
+    if (!re3.test(employeePassword)) {
       console.log('Error: password must contain at least one uppercase letter (A-Z)!');
       return false;
     } 
