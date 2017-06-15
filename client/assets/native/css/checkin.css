@@ -111,3 +111,12 @@ body#check-in-page{
 .hide{
     display: none !important;
 }
+
+#visitor-first-warning, #visitor-last-warning, #visitor-number-warning{
+   display:none;  
+}
+
+#input-warning{
+   color: #f74141;
+   font-size: 16px;   
+}

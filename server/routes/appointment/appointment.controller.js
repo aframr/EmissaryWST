@@ -67,6 +67,7 @@ module.exports.template.create = function(req, res) {
     appointment.date = param.date;
     appointment.company_id = param.company_id;
     appointment.provider_name = param.provider_name;
+    appointment.company_name = param.company_name;
 
     Appointment.find(
         {
