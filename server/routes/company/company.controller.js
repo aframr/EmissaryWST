@@ -28,7 +28,7 @@ module.exports.template = {};
  * @apiName create
  * @apiGroup company
  *
- * @apiParam {String} name User's nameD
+ * @apiParam {String} name User's name
  * @apiParam {String} email User's email
  * @apiParam {String} phone_number User's phone number
  *

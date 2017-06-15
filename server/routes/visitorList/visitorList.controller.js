@@ -8,6 +8,7 @@ var TextModel = require('../../notification/text');
 var VisitorList = require('../../models/VisitorList');
 var Employee = require('../../models/Employee');
 var Appointment = require('../../models/Appointment');
+var Company = require('../../models/Company');
 
 // Store the additional field information not including name and phone_number, in the field additional_info as a dictionary type {}
 /**

@@ -89,6 +89,9 @@ if(app.get('env') !== 'development') {
   app.use('/api/*', validate);
 }
 
+// documentation
+app.use('/apidoc', express.static(path.join(__dirname, '../apidoc')));
+
 app.get('/settings', function(req,res){
   res.sendFile(path.join(__dirname,'../dist/assets/views/settings.html'))
 });
@@ -245,6 +248,7 @@ function handleReservation(request) {
     }
     return response 
 }
+
 
 
 module.exports = app;
