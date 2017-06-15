@@ -17,5 +17,6 @@ gulp.task('dist', [
   'copy:js',
   'copy:sw',
   'copy:images',
-  'babel'
+  'babel-client',
+  'babel-server'
 ]);
