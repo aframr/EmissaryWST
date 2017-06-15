@@ -73,12 +73,13 @@ function handleReservation(request) {
         phone_number = params["phone-number"];
         new_appt_date = params["date"];
        	new_appt_time = params["time"];
+       	response += phone_number + " " + new_appt_time + " " + new_appt_time;
     }
 
     // View Reservation
     else if (request.result.action == "ViewReservation.ViewReservation-custom") {
         phone_number = params["phone-number"];
-
+        response += "Viewing...";
     }
 
     // Create Reservation
