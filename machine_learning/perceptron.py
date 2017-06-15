@@ -129,7 +129,6 @@ class Perceptron(object):
     @staticmethod
     def binary_classifiers(pos_label, neg_label, num_passes):
         """
-        Problem 3.1
         Returns training and test errors for each perceptron type for an input
         number of passes, classifying between the given pos and neg labels.
         """
@@ -151,7 +150,6 @@ class Perceptron(object):
     @staticmethod
     def binary_classifiers_k_strongest(pos_label, neg_labels, num_passes, k):
         """
-        Problem 3.2
         Prints the words associated with the k most representative of the pos and neg
         label respectively (most positive and most negative dot product values)
         """
@@ -192,79 +190,14 @@ class Perceptron(object):
             print s,
             print dictionary[s[1]]
 
-    @staticmethod
-    def build_confusion_matrix():
-        """
-        Problem 3.3
-        Builds transposed confusion matrix, with true class label as row and
-        predicted class label as column. 
-        """
-        # get number of data points for each label
-        data = numpy.loadtxt(TEST_FILE, dtype=int) 
-        label_dict = {}
-        for label in [d[-1] for d in data]:
-            if label not in label_dict:
-                label_dict[label] = 1
-            else:
-                label_dict[label] = label_dict[label] + 1
-
-        # all_labels used to construct "all"/neg labels
-        all_labels = [key for key in label_dict]
-        # build k classifiers
-        print "Building classifiers:\n"
-        perceptrons = {}
-        for label in all_labels:
-            print "Building classifier %d vs all" % label
-            neg_labels = all_labels[:]
-            neg_labels.remove(label)
-            p = Perceptron(TRAINING_FILE, label, neg_labels)
-            p.train()
-            perceptrons[label] = p
-
-        print "Building confusion matrix..."
-        # build confusion matrix (transposed for faster scalar multiplication)
-        confusion_matrix = numpy.zeros((len(all_labels), len(all_labels) + 1))
-
-        for d in data:
-            x, label = d[:-1], d[-1]
-            
-            classified = []
-            for perceptron_label in perceptrons:
-                perceptron = perceptrons[perceptron_label]
-                prediction_sign = perceptron.predict(numpy.array(x), GEN)
-
-                # randomize
-                if prediction_sign == 0:
-                    prediction_sign = 1 if (random.random() > 0.5) else -1
-
-                if prediction_sign == 1:
-                    classified.append(perceptron_label)
-
-            # see how many classifiers believed x in C_i
-            if len(classified) == 1:
-                confusion_matrix[label - 1][classified[0] - 1] += 1
-            else:
-                # don't know 
-                confusion_matrix[label - 1][len(all_labels)] += 1
-
-        # divide prediction rows by total label count
-        for label in label_dict:
-            confusion_matrix[label - 1] /= float(label_dict[label])
-
-        print "Confusion matrix: "
-        print str(numpy.transpose(confusion_matrix))
-
-
 def main():
     print "Initializing perceptron..."
-    # problem 3.1
+    # use this for testing your perceptron
     Perceptron.binary_classifiers(1, 2, 3)
 
-    # problem 3.2
+    # use this to find 
     Perceptron.binary_classifiers_k_strongest(1, [2], 3, 3)
 
-    # problem 3.3
-    #Perceptron.build_confusion_matrix()
 
 if __name__ == "__main__":
     main()
