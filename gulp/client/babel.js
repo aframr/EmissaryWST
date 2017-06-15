@@ -10,5 +10,5 @@ gulp.task("babel-client", function () {
 gulp.task("babel-server", function () {
     return gulp.src('./server/**/*.js')
         .pipe(babel())
-        .pipe(gulp.dest('./server/'));
+        .pipe(gulp.dest('./server-dist/'));
 });
