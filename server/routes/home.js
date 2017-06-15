@@ -6,7 +6,8 @@
 var express = require('express');
 var path = require('path');
 var router = express.Router();
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
+var Company = require('../models/Company');
 router.use(bodyParser.json());
 
 /**
@@ -20,7 +21,7 @@ router.get('/', function(req, res) {
 /**
  * webhook POST from api.ai
  */
-router.post('/hook', function (req, res) {
+/*router.post('/hook', function (req, res) {
 
     console.log('hook request');
 
@@ -63,6 +64,7 @@ router.post('/hook', function (req, res) {
 // 1.c case : create 
 // 1.d case : delete
 // TODO: add given information to database or extract from database
+var companyID;
 function handleReservation(request) {
     params = request.result.parameters;
     sess_id = request.id;
@@ -89,9 +91,15 @@ function handleReservation(request) {
         new_appt_date = params["date"];
         new_appt_time = params["time"];
         company = params["company"]; 
-        response += request.result.fulfillment.speech;
-    }
+        var valid = validateCompany(company);
+        if(valid != "valid"){
+            response+= valid;
+        }
+        else{
+            response += "valid company";
+        }  
 
+    }
     // Delete Reservation
     else if (request.result.action == "DeleteReservation.DeleteReservation-custom") {
         phone_number = params["phone-number"];
@@ -109,5 +117,19 @@ function handleReservation(request) {
     }
     return response 
 }
-
+//Checks if the requested company is in our database. 
+function validateCompany(company_name){
+    Company.findOne({"name": value}, function(err,company){
+      if(!company){
+        return "This company does not use our service. Please encourage them to do so and try again.";
+      }
+     else{
+       companyID = company._id;
+       return "valid";
+     }
+    }); 
+}*/
 module.exports = router;
+
+
+
