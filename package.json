@@ -68,6 +68,8 @@
   },
   "devDependencies": {
     "chai": "1.10.0",
+    "gulp-angular-htmlify": "2.3.0",
+    "gulp-nightwatch": "^0.3.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.2.0",
