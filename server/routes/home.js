@@ -6,12 +6,6 @@
 var express = require('express');
 var path = require('path');
 var router = express.Router();
-<<<<<<< HEAD
-=======
-var bodyParser = require('body-parser');
-var Company = require('../models/Company');
-router.use(bodyParser.json());
->>>>>>> baf70cc6bc2928c4d346e579eac994d3db4d5235
 
 /**
  * GET /
@@ -21,7 +15,6 @@ router.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../dist/visitors.html'));
 });
 
-<<<<<<< HEAD
 // /**
 //  * webhook POST from api.ai
 //  */
@@ -114,7 +107,6 @@ router.get('/', function(req, res) {
 //     }
 //     return response 
 // }
-=======
 /**
  * webhook POST from api.ai
  */
@@ -229,5 +221,4 @@ function validateCompany(company_name){
 module.exports = router;
 
 
->>>>>>> baf70cc6bc2928c4d346e579eac994d3db4d5235
 
