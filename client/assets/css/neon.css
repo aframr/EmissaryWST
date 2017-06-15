@@ -485,7 +485,7 @@ body .carousel-inner > .active {
   transform: scaleX(1);
 }
 .site-footer {
-  background: #eeeeee;
+  background:rgba(255, 194, 0, 0.89);
   padding: 30px 0;
 }
 .mobile-menu {
@@ -593,7 +593,7 @@ body .carousel-inner > .active {
   border-top: 1px solid #f2f2f2;
 }
 .footer-widgets p {
-  color: #999999;
+  color: #000000;
   margin-bottom: 0;
 }
 .footer-widgets p + p {
@@ -636,7 +636,6 @@ body .carousel-inner > .active {
   display: inline-block;
 }
 .testimonials-container {
-  background: url(../images/testimonials-bg.png) repeat-x;
   padding: 50px 0;
   padding-bottom: 40px;
   -webkit-background-size: cover;
@@ -670,13 +669,13 @@ body .carousel-inner > .active {
 }
 .testimonials-container .testimonials blockquote small {
   margin-top: 10px;
-  color: #9298a1;
+  color: #000000;
 }
 .testimonials-container .testimonials blockquote small:before {
   display: none;
 }
 .testimonials-container .testimonials blockquote small cite {
-  color: #fff;
+  color: #4f195f;
 }
 .testimonials-container .testimonials-nav {
   margin-top: 30px;
@@ -735,7 +734,7 @@ body .carousel-inner > .active {
 }
 .features-blocks .feature-block p {
   padding-left: 40px;
-  color: #999999;
+  color: #484848;
 }
 .portfolio-widget {
   margin: 50px 0;

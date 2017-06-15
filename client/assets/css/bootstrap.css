@@ -5682,7 +5682,7 @@ button.list-group-item-danger.active:focus {
   border-top-color: #949494;
 }
 .panel-primary > .panel-heading .badge {
-  color: #949494;
+  color: #b76b33;
   background-color: #fff;
 }
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
