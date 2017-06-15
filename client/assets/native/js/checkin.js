@@ -5,6 +5,7 @@ $(document).ready(() => {
   const ADD_VISITOR = 'add_visitor';
 
   const companyData = JSON.parse(localStorage.getItem('currentCompany'));
+  const myCompanyId = companyData._id;
   console.log(companyData);
   socket.emit(VALIDATE_COMPANY_ID, companyData);
 
@@ -13,12 +14,73 @@ $(document).ready(() => {
     e.preventDefault();
   };
 
+  prepareStyle();
+
+  function prepareStyle() {
+      //grab check-in page style
+      const form_data = grabFormStyle();
+      console.log(form_data);
+      document.body.style.backgroundColor = "#" + (form_data.form_color);
+      if (form_data.field1 != "Initial" && form_data.field1 != "NULL") {
+        var newInput = document.createElement('input');
+        newInput.type = "text";
+        newInput.placeholder = form_data.field1;
+        newInput.value = form_data.field1;
+        newInput.className = "visitor-fields";
+
+        $('.check-in').append(newInput);
+        //document.getElementsByClassName("check-in").append(newInput);
+      }
+      if (form_data.field2 != "Initial" && form_data.field2 != "NULL") {
+        var newInput2 = document.createElement('input');
+        newInput2.type = "text";
+        newInput2.placeholder = form_data.field2;
+        newInput2.value = form_data.field2;
+        newInput2.className = "visitor-fields";
+
+        $('.check-in').append(newInput2);
+      }
+      if (form_data.field3 != "Initial" && form_data.field3 != "NULL") {
+        var newInput3 = document.createElement('input');
+        newInput3.type = "text";
+        newInput3.placeholder = form_data.field3;
+        newInput3.value = form_data.field3;
+        newInput3.className = "visitor-fields";
+        $('.check-in').append(newInput3);
+      }
+      if (form_data.field4 != "Initial" && form_data.field4 != "NULL") {
+        var newInput4 = document.createElement('input');
+        newInput4.type = "text";
+        newInput4.placeholder = form_data.field4;
+        newInput4.value = form_data.field4;
+        newInput4.className = "visitor-fields";
+        $('.check-in').append(newInput4);
+      }
+      if (form_data.field5 != "Initial" && form_data.field5 != "NULL") {
+        var newInput5 = document.createElement('input');
+        newInput5.type = "text";
+        newInput5.placeholder = form_data.field5;
+        newInput5.value = form_data.field5;
+        newInput5.className = "visitor-fields";
+        $('.check-in').append(newInput5);
+      }
+
+      var submitBtn = document.createElement('input');
+      submitBtn.type = "submit";
+      submitBtn.value = "Submit";
+      submitBtn.className = "submit-check-in";
+      $('.check-in').append(submitBtn);
+  }
+  
+
+
     // Bind Listeners
   $('#tap-to-check').on('click', startCheckIn);
   $('.check-in').on('submit', submitForm);
 
     // When a user starts their check in
   function startCheckIn() {
+
     $('.check-in').addClass('show');
     $('.check-in').animate({
       top: '10%',
@@ -26,6 +88,27 @@ $(document).ready(() => {
     }, 700);
     $(this).addClass('hide');
     $('#clock').addClass('hide');
+  }
+
+  function grabFormStyle() {
+    var form_data;
+    $.ajax({
+      dataType: 'json',
+      type: 'GET', //create
+      //data: form_data,
+      async: false,
+      url: '/api/'+myCompanyId+'/theme',    //---TODO---
+      /*success(response) {
+        console.log ("Theme found.");
+      },*/
+      success: function(data){
+        console.log ("here's the theme: ");
+        console.log(data);
+        form_data = data;
+      }
+    });
+
+    return form_data;
   }
 
     // When a patient submits their form

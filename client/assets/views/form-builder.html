@@ -21,8 +21,10 @@
 	<link rel="stylesheet" href="assets/css/neon-core.css">
 	<link rel="stylesheet" href="assets/css/neon-theme.css">
 	<link rel="stylesheet" href="assets/css/neon-forms.css">
-	<link rel="stylesheet" href="assets/css/form-builder.css">
+	<link rel="stylesheet" href="assets/native/css/form-builder.css">
 	<link rel="stylesheet" href="assets/css/custom.css">
+	<link rel="stylesheet" href="assets/css/nice-select.css">
+
 	
 	<link rel="stylesheet" href="assets/native/css/appointment.css">
 
@@ -38,6 +40,14 @@
 
 
 </head>
+
+<!--<script>
+	function updateColor(jscolor) {
+    	// 'jscolor' instance can be used as a string
+    	document.getElementById('form-bg').style.backgroundColor = '#' + jscolor;
+	}
+</script>-->
+
 <body class="page-body gray" data-url="http://neon.dev">
 
 <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
@@ -109,7 +119,7 @@
 
 	</div>
 
-	<div class="main-content">
+	<div class="main-content" id="form-bg">
 
 		<div class="row">
 
@@ -156,39 +166,79 @@
 		<hr />
 
 		<center>
-		  <h1>Build your form</h1>
-          <h2>Color picker:</h2> 
-           <div>Color: <input class="jscolor" value="1C7F79"> </div>
-         
+		  <h1 style="font-family:cursive;">Customize Check-in Page</h1>
+           <div><span style="font-family:cursive; font-size:20px;">Background Color: </span><input class="jscolor nice-select" value="F9C800" id="color-choice" style="float:none"> </div>
         </center>
 		<!--<center><h3>Preview</h3></center>-->
 <form class = "form-builder" role = "form">
-   <div class = "form-group">
-      <label for = "f_name">First Name</label>
-      <input type = "text" class = "form-control" id = "f_name" placeholder = "Enter your First Name" required>
-   </div>
-   <div class = "form-group">
-      <label for = "l_name">Last Name</label>
-      <input type = "text" class = "form-control" id = "l_name" placeholder = "Enter your Last Name" required>
-   </div>
-   <div class = "form-group">
-      <label for = "phone">Phone Number</label>
-      <input type = "tel" class = "form-control" pattern='[\(]\d{3}[\)]\d{3}[\-]\d{4}' id = "phone" placeholder = "Enter your Phone Number" required>
-   </div>
-    <div class = "form-group">
-		<div class="my-form">
-   			<div class="addField">
-   			</div>
-   		</div>
-   </div>
 
-   <h3 class = "add-form-text">Add up to two fields</h3>
-   <input type = "text" class = "form-control" id = "optional_label" placeholder = "Enter label for field" maxlength="30">
+    
+    <div class="form-group "> 
+    	<h4 class="labels" style="font-family:cursive; margin-top=2em;"> Label 1 <h4>
+   		<select class="wide" id="select_1">
+   		  <option value="Initial">Select A Label</option>
+		  <option value="First Name">First Name</option>
+		  <option value="Last Name">Last Name</option>
+		  <option value="Phone Number">Phone Number</option>
+		</select>
+   	</div>
+   	<br>
+   	
+   	<div class="form-group "> 
+   		<h4 class="labels" style="font-family:cursive; margin-top=2em;"> Label 2 </h4>
+   		<select class="wide" id="select_2">
+   		  <option value="Initial">Select A Label</option>
+		  <option value="First Name">First Name</option>
+		  <option value="Last Name">Last Name</option>
+		  <option value="Phone Number">Phone Number</option>
+		</select>
+   	</div>
+   	<br>
+   	
+   	<div class="form-group "> 
+   		<h4 class="labels" style="font-family:cursive; margin-top=2em;"> Label 3 </h4>
+   		<select class="wide" id="select_3">
+   		  <option value="Initial">Select A Label</option>
+		  <option value="First Name">First Name</option>
+		  <option value="Last Name">Last Name</option>
+		  <option value="Phone Number">Phone Number</option>
+		</select>
+   	</div>
+   	<br>
+   	
+   	<div class="form-group "> 
+   		<h4 class="labels" style="font-family:cursive; margin-top=2em;"> Label 4 </h4>
+   		<select class="wide" id="select_4">
+   		  <option value="Initial">Select A Label</option>
+		  <option value="First Name">First Name</option>
+		  <option value="Last Name">Last Name</option>
+		  <option value="Phone Number">Phone Number</option>
+		</select>
+   	</div>
+   	<br>
+   	<div class="form-group "> 
+   		<h4 class="labels" style="font-family:cursive; margin-top=2em;"> Label 5 </h4>
+   		<select class="wide" id="select_5">
+   		  <option value="Initial">Select A Label</option>
+		  <option value="First Name">First Name</option>
+		  <option value="Last Name">Last Name</option>
+		  <option value="Phone Number">Phone Number</option>
+		</select>
+   	</div>
+   
+
+   	<br>
+   	<br>
+
+   	<div id="add_label">
+	   <h3 class = "add-form-text" style="font-family:cursive; font-size:20px;">Form Field Customization</h3>
+	   <input type = "text" class = "form-control nice-select" id = "optional_label" placeholder = "Enter name for field" maxlength="30">
+	</div>
    
    <div class="add-fields my-form">
        
-        <button type="button" class="btn btn-success add-box">Add</button>         
-		<button type = "submit" class = "save-form btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-success add-box" id="add-field">Add</button>         
+		<button type = "submit" class = "save-form btn btn-primary" id="submit-form-style">Submit</button>
 	</div>
 
 </form>
@@ -206,6 +256,8 @@
 		<script src="assets/js/resizeable.js"></script>
 		<script src="assets/js/neon-api.js"></script>
 		<script src="assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+		<script src="assets/js/jquery.js"></script> 
+		<script src="assets/js/jquery.nice-select.js"></script>
 		
 
 		<!-- Imported scripts on this page -->

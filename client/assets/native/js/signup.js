@@ -68,6 +68,21 @@ $(document).ready(() => {
     });
   }
 
+  function createInitialForm() {
+    const form_data = {};
+    form_data.user_id = companyId;
+    $.ajax({
+      dataType: 'json',
+      type: 'POST', //create
+      data: form_data,
+      async: false,
+      url: '/api/'+companyId+'/theme',    //---TODO---
+      success(response) {
+        console.log ("Initial theme is saved.");
+      },
+    });
+  }
+
   function validateCompany() {
     const companyName = $('#form-company-name').val();
     const companyEmail = $('#form-email').val();
