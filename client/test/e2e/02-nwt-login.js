@@ -1,3 +1,6 @@
+// Nightwatch e2e Test - Testing Logging In
+// Make sure login info is inside DB.
+
 module.exports = {
   'Login e2e Test Emissary' : function (browser) {
     browser
@@ -5,8 +8,8 @@ module.exports = {
       .waitForElementVisible('body', 5000)
       .click("a[href='login.html']")
       .waitForElementVisible('#username', 5000)
-			.setValue('#username', 'ucsd@ucsd.edu')
-			.setValue('#password', 'ucsd')
+			.setValue('#username', 'temp8@ucsd.edu')
+			.setValue('#password', 'Aa123123')
 			.click('#loginButton')
 			.waitForElementVisible('#visitor-queue', 5000)
       .end();
