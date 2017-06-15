@@ -28,7 +28,7 @@ module.exports.template = {};
  * @apiName create
  * @apiGroup company
  *
- * @apiParam {String} name User's name
+ * @apiParam {String} name User's nameD
  * @apiParam {String} email User's email
  * @apiParam {String} phone_number User's phone number
  *
@@ -60,7 +60,7 @@ module.exports.template.create = function(req, res) {
     company.name = req.body.name;
     company.phone_number = req.body.phone_number;
     company.paid_time=new Date();
-
+    company.id = req.body.name;
     //optinal info
     /*company.expiration_date=req.body.expiration_date;
     company.credit_card_number=req.body.credit_card_number;

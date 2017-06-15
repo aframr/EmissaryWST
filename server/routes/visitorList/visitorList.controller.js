@@ -344,13 +344,14 @@ exports.createReq = function(req, res) {
 }
 
 exports.create = function(param, callback){
+    console.log("enters:" + param.company_id);
     //required fields
     var company_id = param.company_id;
     var first_name = param.first_name;
     var last_name = param.last_name;
     var phone_number = param.phone_number;
     var checkin_time = param.checkin_time;
-
+    
     //optional dic var
     var additional_info = param.additional_info;
 
@@ -369,8 +370,11 @@ exports.create = function(param, callback){
         phone_number: phone_number,
         date: {$gte:today, $lt: tomorrow}
     };
+    //TextModel.sendText(first_name,last_name, employees, function(){respond();});
+
 
     Appointment.find(query, function(err, appointments){
+
         var visitor =
         {
             company_id: company_id,
@@ -381,6 +385,7 @@ exports.create = function(param, callback){
             additional_info: additional_info,
             appointments: appointments
         };
+
         VisitorList.findOne(
             {company_id: company_id},
             function(err, list) {
@@ -394,7 +399,12 @@ exports.create = function(param, callback){
                 list.visitors.push(visitor);
                 list.save(function(err){
                     if(err) return callback({error: "an error in saving"}, null);
-                    return callback(null, list);
+                    Company.findById(company_id, function(err,user){
+                        TextModel.sendText(first_name,last_name, user.phone_number);
+                        console.log("Phone Number is: " + user.phone_number);
+                    });
+                    
+                    //return callback(null, list);
                     /*Employee.find({company : req.body.company_id},
                      function(err, employees) {
                      var i = 0;
@@ -409,7 +419,18 @@ exports.create = function(param, callback){
                      TextModel.sendText(req.body.name, employees, function(){respond();});
                      }
                      );*/
-                });
+                          //Placeholder this will send text on any checkin while we only want it from someone with an appointment
+                               // var i = 0;
+   /* Employee.find({company : req.body.company_id},
+      function(err, employees) {
+      i = 0;
+      var respond = function() {i++;
+      if(i == employees.length) { res.status(200).json(list);}};  
+        console.log("employees is:" +employees);
+        TextModel.sendText(first_name,last_name, employees, function(){respond();});
+        });*/ 
+      });
+
             }
         );
     });
