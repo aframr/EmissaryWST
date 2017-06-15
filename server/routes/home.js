@@ -30,17 +30,9 @@ router.post('/hook', function (req, res) {
         if (req.body) {
             var requestBody = req.body;
 
+            // Handle reservations given POST Request
             if (requestBody.result) {
-                speech = '';
-                
-                if (requestBody.result.action && requestBody.result.action == 'reservation')
-                {
-                    speech = handleReservation(requestBody);
-                }
-                else 
-                {
-                    // handle error case 
-                }
+                speech = handleReservation(requestBody);
             }
         }
 
@@ -69,33 +61,52 @@ router.post('/hook', function (req, res) {
 // 1.a case : edit 
 // 1.b case : view
 // 1.c case : create 
-// 1.d case : delete 
+// 1.d case : delete
+// TODO: add given information to database or extract from database
 function handleReservation(request) {
     params = request.result.parameters;
+    sess_id = request.id;
     response = "";
-    if (params.action == 'edit') {
-        // search database for item
-        // edit that item with given parameters 
+
+    // Edit Reservation
+    if (request.result.action == "EditReservation.EditReservation-custom") {
+        phone_number = params["phone-number"];
+        new_appt_date = params["date"];
+       	new_appt_time = params["time"];
     }
-    else if (params.action == 'view') {
-        // search database for name/phone/email prompt 
-        // return it in response
+
+    // View Reservation
+    else if (request.result.action == "ViewReservation.ViewReservation-custom") {
+        phone_number = params["phone-number"];
 
     }
-    else if (params.action == 'create') {
-        // create new entry in database with given parameters 
 
+    // Create Reservation
+    else if (request.result.action == "CreateReservation.CreateReservation-custom") {
+        name = params["given-name"];
+        phone_number = params["phone-number"];
+        new_appt_date = params["date"];
+        new_appt_time = params["time"];
+        company = params["company"]; 
+        response += request.result.fulfillment.speech;
     }
-    else if (params.action == 'delete') {
-        // search database for name,phone,email identification 
-        // delete the item from database 
+
+    // Delete Reservation
+    else if (request.result.action == "DeleteReservation.DeleteReservation-custom") {
+        phone_number = params["phone-number"];
+        response += request.result.fulfillment.speech;
+    }
+
+    // Normal Case / default case
+    else if (request.result.fulfillment.speech)
+    {
+    	response += request.fulfillment.speech;
     }
     else {
-        response += "Action not specified, please include action as 'edit','view','create', or 'delete'";
-        // action not specified 
+        // action not understood 
+        response += "Can you rephrase that?";
     }
     return response 
-
 }
 
 module.exports = router;
