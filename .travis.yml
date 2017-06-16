@@ -18,7 +18,6 @@ deploy:
   app: 
     master: lucky13
     develop: lucky13-dev
-    codeclimate: temp-13-1
-    frontend/dasboard: temp-13-2
+    frontend/dashboard: temp-13-1
   on:
     repo: aframr/EmissaryWST

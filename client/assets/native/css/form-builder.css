@@ -1,9 +1,21 @@
 #optional_label.form-control{
-	max-width: 70%;
+	max-width: 50%;
+	/*margin-left: 25%;*/
+	height: 40px;
 }
 
 .form-control{
 	display: inline;
+}
+
+.form-control input[type="text"] {
+  padding: 10px;
+  border: solid 5px #c9c9c9;
+  transition: border 0.3s;
+}
+.form-control input[type="text"]:focus,
+.form-control input[type="text"].focus {
+  border: solid 5px #969696;
 }
 
 #box1, #box2{
@@ -41,23 +53,66 @@ hr{
 .add-form-text{
 	width: 50%;
 	max-width: 400px;
-	margin: 25px auto;
+	/*margin: 25px auto;*/
 
+}
+
+#add_label {
+	margin-left: 270px;
 }
 
 .add-fields{
 	width: 50%;
 	max-width: 400px;
-	margin-left: auto;
+	/*margin-left: auto;*/
+	margin-left: 500px;
 	margin-right: auto;
 }
 
-.save-form{
-	margin-top: 25px;
+/*.save-form{
+	margin-top: 20px;
+}
+
+.add-box {
+	margin-top: 20px;
+}*/
+
+.labels {
+	font-family: cursive;
+	font-size: 18px;
+}
+
+select {
+  display: none;
 }
 
 h1{
+	font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+	font-variant: small-caps;
 	margin-top: 40px;
 	margin-bottom: 15px;
 	text-align: center;
+}
+
+h2 {
+	font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+	font-size: 24px;
+	font-style: italic;
+	font-variant: small-caps;
+	font-weight: 400;
+	line-height: 24px;
+}
+
+h4 {
+	font-family: cursive;
+	font-size: 18px;
+}
+
+h5 {
+	font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+	font-size: 20px;
+	font-style: italic;
+	font-variant: small-caps;
+	font-weight: 400;
+	line-height: 24px;
 }
