@@ -16,5 +16,8 @@ ratings:
   - routes/**/*.css
 exclude_paths:
 - dist/**/*
+- server-dist/**/*.js
 - node_modules/**/*
 - client/bower_components/**/*
+- gulp/**/*.js
+- apidoc/**/*

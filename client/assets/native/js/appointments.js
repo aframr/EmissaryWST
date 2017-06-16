@@ -3,7 +3,7 @@ $(document).ready(() => {
   const companyData = JSON.parse(localStorage.getItem('currentCompany'));
   const myCompanyId = companyData._id;
   const curUser = JSON.parse(localStorage.getItem('currentUser'));
-  
+
 
   $('#user-name').text(`${curUser.first_name} ${curUser.last_name}`);
 
@@ -94,7 +94,7 @@ $(document).ready(() => {
   $('#appt-list').html(compiledHtml);
   $('.save-btn').click(submitForm);
 
-   /** *
+  /** *
      * Makes a get request to display list of appts
      * @param none
      * @returns displays the appt list
@@ -115,7 +115,7 @@ $(document).ready(() => {
     return json;
   }
 
-   /** *
+  /** *
      * When a patient submits their form
      * @param none
      * @returns updates the appt list
@@ -133,7 +133,7 @@ $(document).ready(() => {
       document.getElementById('appt-form').reset();      
   }
 
-    /** *
+  /** *
      * Makes a post request to update list of appts when adding a new employee
      * @param none
      * @returns updates the appt list
@@ -231,7 +231,7 @@ $(document).ready(() => {
     return false;
   }
 
-    /** *
+  /** *
      * Grabs elements from the check in and puts it into an object
      * @param none
      * @returns new appt object
@@ -247,9 +247,9 @@ $(document).ready(() => {
     newAppt.provider_name = $('#appt-provider').val();
     newAppt.company_name = curUser.company_name;
     userDate = $('#appt-date').val();
-    
+
     userTime = $('#appt-time').val();
-    var inputDate = (new Date(jsDate(userDate, userTime)));
+    const inputDate = (new Date(jsDate(userDate, userTime)));
     newAppt.date = inputDate.toISOString();
 
     return newAppt;
@@ -271,28 +271,28 @@ $(document).ready(() => {
   });
 
 
-    /** ******************* FUNCTIONS TO FORMAT JAVASCRIPT DATES ********************/
+  /** ******************* FUNCTIONS TO FORMAT JAVASCRIPT DATES ********************/
 
   function formatDate(date) {
     const d = new Date(Date.parse(date));
     let mm = d.getMonth() + 1;
     const yyyy = d.getFullYear();
     let dd = d.getDate();
-      // var monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug","Sep","Nov","Dec"];
+    // var monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug","Sep","Nov","Dec"];
     if (dd < 10) {
       dd = `0${dd}`;
     }
     if (mm < 10) {
       mm = `0${mm}`;
     }
-      // console.log(monthArray[mm]);
+    // console.log(monthArray[mm]);
     return `${mm}/${dd}/${+yyyy}`;
   }
   function formatNumber(number) {
-return `(${number.substr(0, 3)})${number.substr(3, 3)}-${number.substr(6, 4)}`;
+    return `(${number.substr(0, 3)})${number.substr(3, 3)}-${number.substr(6, 4)}`;
   }
 
-    // FUNCTION TO FORMAT DATE OBJECT IN JS
+  // FUNCTION TO FORMAT DATE OBJECT IN JS
   function jsDate(date, time) {
     const jsDate = reFormatDate(date);
     const jsTime = reFormatTime(time);
@@ -300,9 +300,9 @@ return `(${number.substr(0, 3)})${number.substr(3, 3)}-${number.substr(6, 4)}`;
     return jsDateObj;
   }
 
-    // FUNCTION TO FORMAT DATE TO JS FOR ROBOTS
+  // FUNCTION TO FORMAT DATE TO JS FOR ROBOTS
   function reFormatDate(date) {
-    const d= new Date(Date.parse(date));
+    const d = new Date(Date.parse(date));
     let mm = d.getMonth() + 1;
     const yyyy = d.getFullYear();
     let dd = d.getDate();
@@ -317,7 +317,7 @@ return `(${number.substr(0, 3)})${number.substr(3, 3)}-${number.substr(6, 4)}`;
   }
 
 
-    // FUNCTION TO FORMAT TIME TO JS FOR ROBOTS
+  // FUNCTION TO FORMAT TIME TO JS FOR ROBOTS
   function reFormatTime(time) {
     const ampm = time.substr(-2, 2);
     let formattedTime;
@@ -344,18 +344,17 @@ return `(${number.substr(0, 3)})${number.substr(3, 3)}-${number.substr(6, 4)}`;
   }
 
 
-    // FUNCTION TO FORMAT TIME TO AM AND PM FOR HUMANS
+  // FUNCTION TO FORMAT TIME TO AM AND PM FOR HUMANS
   function formatTime(time) {
-    
-    //console.log(currentTimeNotLocal);
-   // let currentTime = new Date(Date.parse(time)).toUTCString();
-   // var currentTimeArr = currentTime.split(" ");
-   // let currentTime= new Date(currentTimeNotLocal);
-   let currentTime = new Date(Date.parse(time));
-   // let hour = currentTimeArr[4].substring(-1,2);
-   // let minute = currentTimeArr[4].substring(3,5);
-   let hour = currentTime.getHours();
-   let minute = currentTime.getMinutes();
+    // console.log(currentTimeNotLocal);
+    // let currentTime = new Date(Date.parse(time)).toUTCString();
+    // var currentTimeArr = currentTime.split(" ");
+    // let currentTime= new Date(currentTimeNotLocal);
+    let currentTime = new Date(Date.parse(time));
+    // let hour = currentTimeArr[4].substring(-1,2);
+    // let minute = currentTimeArr[4].substring(3,5);
+    let hour = currentTime.getHours();
+    let minute = currentTime.getMinutes();
     if (minute < 10) {
       minute = `0${minute}`;
     }
