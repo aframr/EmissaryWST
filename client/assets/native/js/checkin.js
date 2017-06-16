@@ -6,6 +6,8 @@ $(document).ready(() => {
 
   const companyData = JSON.parse(localStorage.getItem('currentCompany'));
   const myCompanyId = companyData._id;
+
+  var fieldNum = 0;
   console.log(companyData);
   socket.emit(VALIDATE_COMPANY_ID, companyData);
 
@@ -22,7 +24,7 @@ $(document).ready(() => {
       const form_data = grabFormStyle();
       console.log(form_data);
       document.body.style.backgroundColor = "#" + (form_data.form_color);
-      if (form_data.field1 != "Initial" && form_data.field1 != "NULL") {
+      /*if (form_data.field1 != "Initial" && form_data.field1 != "NULL") {
         var newInput = document.createElement('input');
         newInput.type = "text";
         newInput.placeholder = form_data.field1;
@@ -48,21 +50,26 @@ $(document).ready(() => {
         newInput3.value = form_data.field3;
         newInput3.className = "visitor-fields";
         $('.check-in').append(newInput3);
-      }
+      }*/
+
       if (form_data.field4 != "Initial" && form_data.field4 != "NULL") {
         var newInput4 = document.createElement('input');
         newInput4.type = "text";
-        newInput4.placeholder = form_data.field4;
-        newInput4.value = form_data.field4;
+        //newInput4.placeholder = form_data.field4;
+        newInput4.value = form_data.field4 + ": ";
         newInput4.className = "visitor-fields";
+        fieldNum += 1;
+        newInput4.id = "field-"+fieldNum;
         $('.check-in').append(newInput4);
       }
       if (form_data.field5 != "Initial" && form_data.field5 != "NULL") {
         var newInput5 = document.createElement('input');
         newInput5.type = "text";
-        newInput5.placeholder = form_data.field5;
-        newInput5.value = form_data.field5;
+        //newInput5.placeholder = form_data.field5;
+        newInput5.value = form_data.field5 + ": ";
         newInput5.className = "visitor-fields";
+        fieldNum += 1;
+        newInput5.id = "field-"+fieldNum;
         $('.check-in').append(newInput5);
       }
 
@@ -113,9 +120,9 @@ $(document).ready(() => {
     return form_data;
   }
 
-  //document.getElementById("visitor-first").addEventListener("change", visitorFirstWatcher);
-  //document.getElementById("visitor-last").addEventListener("change", visitorLastWatcher);
-  //document.getElementById("visitor-number").addEventListener("change", visitorPhoneWatcher);
+  document.getElementById("visitor-first").addEventListener("change", visitorFirstWatcher);
+  document.getElementById("visitor-last").addEventListener("change", visitorLastWatcher);
+  document.getElementById("visitor-number").addEventListener("change", visitorPhoneWatcher);
 
   function visitorPhoneWatcher() {
     const number = $('#visitor-number').val();
@@ -157,7 +164,7 @@ $(document).ready(() => {
   function submitForm() {
     const number = $('#visitor-number').val();
     if (validateNumber(number)) {
-      // event.preventDefault();
+       event.preventDefault();
       const data = grabFormElements();
       // console.log(data.company_id);
       if (localStorage.getItem('slackToken') && localStorage.getItem('slackChannel')) {
@@ -170,7 +177,11 @@ $(document).ready(() => {
           (data, status) => {
           });
       }
+
+      console.log ("here");
+      
       socket.emit(ADD_VISITOR, data);
+      console.log (data);
 
       $(this).animate({
         top: '35%',
@@ -187,6 +198,15 @@ $(document).ready(() => {
     newVisitor.first_name = $('#visitor-first').val();
     newVisitor.last_name = $('#visitor-last').val();
     newVisitor.phone_number = $('#visitor-number').val();
+    newVisitor.field1 = "";
+    newVisitor.field2 = "";
+    if (fieldNum >= 1) {
+      newVisitor.field1 = $('#field-1').val();
+    }
+    if (fieldNum == 2) {
+      newVisitor.field2 = $('#field-2').val();
+    }
+
     newVisitor.checkin_time = new Date();
     return newVisitor;
   }

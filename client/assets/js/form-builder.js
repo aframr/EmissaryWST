@@ -17,9 +17,9 @@ $('.my-form:last .add-box').click(function(){
         //box_html.hide();
         //$('.my-form:first .addField:last').before(box_html);
         //box_html.fadeIn('slow');
-    $('#select_1').append('<option value='+label+'>'+label+'</option>');
-    $('#select_2').append('<option value='+label+'>'+label+'</option>');
-    $('#select_3').append('<option value='+label+'>'+label+'</option>');
+    //$('#select_1').append('<option value='+label+'>'+label+'</option>');
+    //$('#select_2').append('<option value='+label+'>'+label+'</option>');
+    //$('#select_3').append('<option value='+label+'>'+label+'</option>');
     $('#select_4').append('<option value='+label+'>'+label+'</option>');
     $('#select_5').append('<option value='+label+'>'+label+'</option>');
     $('#optional_label').val("");
@@ -68,11 +68,11 @@ function grabFormStyle() {
     const newStyle = {};
     newStyle.user_id = myCompanyId;
     newStyle.form_color = $('#color-choice').val();
-    newStyle.field1 = $('#select_1').val();
-    newStyle.field2 = $('#select_2').val();
-    newStyle.field3 = $('#select_3').val();
+    newStyle.field1 = "First Name";
+    newStyle.field2 = "Last Name";
+    newStyle.field3 = "Phone Number"
     newStyle.field4 = $('#select_4').val();
-    console.log("select4 value: " + $('#select_4').val());
+    //console.log("select4 value: " + $('#select_4').val());
     newStyle.field5 = $('#select_5').val();
 
     return newStyle;

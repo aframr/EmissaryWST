@@ -346,6 +346,8 @@ exports.create = function (param, callback) {
   const last_name = param.last_name;
   const phone_number = param.phone_number;
   const checkin_time = param.checkin_time;
+  const field1 = param.field1;
+  const field2 = param.field2;
 
   // optional dic var
   const additional_info = param.additional_info;
@@ -378,6 +380,8 @@ exports.create = function (param, callback) {
           checkin_time,
           additional_info,
           appointments,
+          field1,
+          field2
         };
 
     VisitorList.findOne(
@@ -390,6 +394,9 @@ exports.create = function (param, callback) {
           list.company_id = company_id;
         }
         list.visitors.push(visitor);
+        console.log("this is visitor: ");
+        console.log(visitor);
+
         list.save((err) => {
           if (err) return callback({ error: 'an error in saving' }, null);
           Company.findById(company_id, (err, user) => {
@@ -423,7 +430,7 @@ exports.create = function (param, callback) {
         TextModel.sendText(first_name,last_name, employees, function(){respond();});
         });*/
         });
-      },
+      }
     );
   });
 };

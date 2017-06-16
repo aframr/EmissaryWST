@@ -29,6 +29,8 @@ const visitorSchema = new Schema({
   checkin_time: { type: Date, default: Date.now, required: true },
   appointments: { type: [appointmentSchema] },
   additional_info: {},
+  field1: {type: String, default: ""},
+  field2: {type: String, default: ""}
 });
 
 
