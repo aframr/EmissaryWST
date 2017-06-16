@@ -8,16 +8,16 @@ $(document).ready(() => {
   console.log(companyData);
   socket.emit(VALIDATE_COMPANY_ID, companyData);
 
-    // Prevent users from scrolling around on iPad
+  // Prevent users from scrolling around on iPad
   document.ontouchmove = function (e) {
     e.preventDefault();
   };
 
-    // Bind Listeners
+  // Bind Listeners
   $('#tap-to-check').on('click', startCheckIn);
   $('.check-in').on('submit', submitForm);
 
-    // When a user starts their check in
+  // When a user starts their check in
   function startCheckIn() {
     $('.check-in').addClass('show');
     $('.check-in').animate({
@@ -28,34 +28,34 @@ $(document).ready(() => {
     $('#clock').addClass('hide');
   }
 
-  document.getElementById("visitor-first").addEventListener("change", visitorFirstWatcher);
-  document.getElementById("visitor-last").addEventListener("change", visitorLastWatcher);
-  document.getElementById("visitor-number").addEventListener("change", visitorPhoneWatcher);
+  document.getElementById('visitor-first').addEventListener('change', visitorFirstWatcher);
+  document.getElementById('visitor-last').addEventListener('change', visitorLastWatcher);
+  document.getElementById('visitor-number').addEventListener('change', visitorPhoneWatcher);
   function visitorPhoneWatcher() {
     const number = $('#visitor-number').val();
-    
-    if (!validateNumber(number)){
+
+    if (!validateNumber(number)) {
       $('#visitor-number-warning').show();
-    } else{
+    } else {
       $('#visitor-number-warning').hide();
-    }   
+    }
   }
-    function visitorFirstWatcher() {
+  function visitorFirstWatcher() {
     const first = $('#visitor-first').val();
 
     if (first == '') {
-      $('#visitor-first-warning').show();      
-    }else{
+      $('#visitor-first-warning').show();
+    } else {
       $('#visitor-first-warning').hide();
     }
   }
 
   function visitorLastWatcher() {
-    const last = $('#visitor-last').val();    
+    const last = $('#visitor-last').val();
 
     if (last == '') {
-      $('#visitor-last-warning').show();      
-    }else{
+      $('#visitor-last-warning').show();
+    } else {
       $('#visitor-last-warning').hide();
     }
   }
@@ -65,13 +65,13 @@ $(document).ready(() => {
     return re.test(number);
   }
 
-    // When a patient submits their form
+  // When a patient submits their form
   function submitForm() {
     const number = $('#visitor-number').val();
-    if(validateNumber(number)){
-          // event.preventDefault();
+    if (validateNumber(number)) {
+      // event.preventDefault();
       const data = grabFormElements();
-          // console.log(data.company_id);
+      // console.log(data.company_id);
       if (localStorage.getItem('slackToken') && localStorage.getItem('slackChannel')) {
         $.post('https://slack.com/api/chat.postMessage',
           {
@@ -79,8 +79,8 @@ $(document).ready(() => {
             channel: localStorage.getItem('slackChannel'),
             text: `Name: ${data.first_name} ${data.last_name} Phone Number: ${data.phone_number}`,
           },
-               (data, status) => {
-               });
+          (data, status) => {
+          });
       }
       socket.emit(ADD_VISITOR, data);
 
@@ -88,12 +88,11 @@ $(document).ready(() => {
         top: '35%',
         opacity: '0',
       }, 0);
-    }
-    else{
-      location.reload();     
+    } else {
+      location.reload();
     }
   }
-    // Grabs elements from the check in and puts it into an object
+  // Grabs elements from the check in and puts it into an object
   function grabFormElements() {
     const newVisitor = {};
     newVisitor.company_id = companyData._id;
@@ -104,23 +103,23 @@ $(document).ready(() => {
     return newVisitor;
   }
 
-    // CLOCK
+  // CLOCK
   function updateClock() {
     const currentTime = new Date();
     let currentHours = currentTime.getHours();
     let currentMinutes = currentTime.getMinutes();
-        // var currentSeconds = currentTime.getSeconds ( );
-        // Pad the minutes and seconds with leading zeros, if required
+    // var currentSeconds = currentTime.getSeconds ( );
+    // Pad the minutes and seconds with leading zeros, if required
     currentMinutes = (currentMinutes < 10 ? '0' : '') + currentMinutes;
-        // currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+    // currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
 
-        // Convert the hours component to 12-hour format if needed
+    // Convert the hours component to 12-hour format if needed
     currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
 
-        // Convert an hours component of "0" to "12"
+    // Convert an hours component of "0" to "12"
     currentHours = (currentHours == 0) ? 12 : currentHours;
 
-        // Compose the string for display
+    // Compose the string for display
     const currentTimeString = `${currentHours}:${currentMinutes}`;
 
     $('#clock').html(currentTimeString);
@@ -128,7 +127,7 @@ $(document).ready(() => {
   updateClock();
   setInterval(updateClock, 60 * 1000);
 
-    /** *
+  /** *
      * Find a specific cookie name
      * @param cName
      * @returns {string|*}

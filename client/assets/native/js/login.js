@@ -2,7 +2,7 @@
 $(() => {
   $('#loginButton').click(() => {
     const userData = grabUserData();
-       // alert(userData);
+    // alert(userData);
     event.preventDefault();
     ajaxPostUser('/api/employees/login', userData);
   });
@@ -40,7 +40,7 @@ function ajaxPostUser(url, data) {
     error() {
       window.onerror = handleError();
       event.preventDefault();
-           // location.href = '/login.html';
+      // location.href = '/login.html';
     },
   });
 }
@@ -55,7 +55,7 @@ function ajaxGetCompanyInfo(url) {
     dataType: 'json',
     success(response) {
       console.log(response);
-           // alert(response.name);
+      // alert(response.name);
       localStorage.setItem('currentCompany', JSON.stringify(response));
     },
   });
