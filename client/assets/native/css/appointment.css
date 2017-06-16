@@ -63,3 +63,12 @@ tr:nth-last-child(1){
 .message-api a:hover{
    color: #5b677b !important;
 }
+
+#app-number-warning, #app-first-warning, #app-last-warning, #app-provider-warning, #app-date-warning, #app-time-warning{
+   display:none;  
+}
+
+#input-warning{
+   color: #f74141;
+   font-size: 10px;   
+}
