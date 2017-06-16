@@ -1,0 +1,45 @@
+{
+  "src_folders" : ["client/test/e2e"],
+	"output_folder": "",
+  "custom_commands_path" : "",
+  "custom_assertions_path" : "",
+  "page_objects_path" : "",
+  "globals_path" : "",
+
+  "selenium" : {
+    "start_process" : false,
+    "server_path" : "./bin/selenium-server-standalone-3.4.0.jar",
+    "log_path" : "",
+    "host": "127.0.0.1",
+    "port" : 4444,
+    "cli_args" : {
+      "webdriver.gecko.driver" : "./bin/geckodriver.exe",
+			"webdriver.firefox.profile" : "webdriver"
+    }
+  },
+	
+	"test_workers" : {"enabled" : true, "workers" : "auto"}, 
+
+  "test_settings" : {
+    "default" : {
+      "launch_url": "http://ondemand.saucelabs.com:80", 
+      "selenium_port": 80,
+      "selenium_host": "ondemand.saucelabs.com",
+      "silent": true,
+      "screenshots" : {
+        "enabled" : false,
+        "path" : ""
+      },
+			"username" : "aframr",    
+      "access_key" : "956f3b53-ae1c-4a4c-a1ca-41c81b8fe522", 
+      "globals": {
+        "waitForConditionTimeout": 10000    
+      },
+      "desiredCapabilities": {
+        "browserName": "firefox",
+				"javascriptEnabled": true,
+        "acceptSslCerts": true
+      }
+    }
+  }
+}

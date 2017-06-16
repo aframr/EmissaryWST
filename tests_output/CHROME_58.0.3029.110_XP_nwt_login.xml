@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="1">
+
+  <testsuite name="nwt_login"
+    errors="0" failures="0" hostname="" id="" package="nwt_login" skipped="0"
+    tests="1" time="8.658" timestamp="Thu, 15 Jun 2017 22:51:14 GMT">
+  
+    <testcase name="Login e2e Test Emissary" classname="nwt_login" time="8.658" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

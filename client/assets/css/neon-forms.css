@@ -487,8 +487,8 @@ div.datepicker {
   border-radius: 3px;
   direction: ltr;
   /*.dow {
-		border-top: 1px solid #ddd !important;
-	}*/
+    border-top: 1px solid #ddd !important;
+  }*/
 }
 div.datepicker-inline {
   width: 206px;
@@ -4079,7 +4079,7 @@ hr + .mail-env {
   }
 }
 .login-page {
-  background: #303641;
+  background: #de922b;
 }
 .login-page .login-content {
   position: relative;
@@ -4097,7 +4097,7 @@ hr + .mail-env {
 }
 .login-page .login-header {
   position: relative;
-  background: #373e4a;
+  background: #f9c800;
   padding: 100px 0;
   -moz-transition: all 550ms ease-in-out;
   -webkit-transition: all 550ms ease-in-out;
@@ -4146,8 +4146,8 @@ hr + .mail-env {
   transition: all 550ms ease-in-out;
 }
 .login-page .login-form .form-group .input-group {
-  background: #373e4a;
-  border: 1px solid #373e4a;
+  background: #e8a300;
+  border: 1px solid #fffed5;
   padding-top: 6px;
   padding-bottom: 6px;
   -moz-transition: all 300ms ease-in-out;
@@ -4265,7 +4265,7 @@ hr + .mail-env {
   padding-bottom: 5px;
 }
 .login-page .login-form .form-group .btn-login {
-  border: 1px solid #454a54;
+  border: 1px solid #ffffff;
   text-align: left;
   padding: 15px 20px;
   font-size: 14px;

@@ -8,10 +8,10 @@
 	<meta name="description" content="Neon Admin Panel" />
 	<meta name="author" content="" />
 
-	<link rel="icon" href="assets/images/logo-emissary.png">
+	<link rel="icon" href="assets/images/iconChicken.png">
 
-	<title>Emissary | Appointments</title>
-	
+	<title>CHEK'N | Appointments</title>
+
 	<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 	<link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -51,7 +51,7 @@
 				<!-- logo -->
 				<div class="logo">
 					<a href="index.html">
-						<img src="images/emissary.png" width="150" alt="" />
+						<img src="images/NEWLOGO.png" width="150" alt="" />
 					</a>
 				</div>
 
@@ -100,11 +100,17 @@
 					</a>
 				</li>
 				<li>
+					<a href="/admin-dashboard.html">
+						<i class="entypo-layout"></i>
+						<span class="title">Dashboard</span>
+					</a>
+				</li>
+				<li>
 					<a href="/settings.html">
 						<i class="entypo-tools"></i>
 						<span class="title">Settings</span>
 					</a>
-				</li>
+				</li> 
 			</ul>
 
 		</div>
@@ -131,15 +137,12 @@
 			<!-- Raw Links -->
 			<div class="col-md-6 col-sm-4 clearfix hidden-xs">
 				<ul class="list-inline links-list pull-right">
-					<div class="dropdown">
-                        <i class="fa fa-3x fa-cog dropdown-toggle" data-toggle="dropdown"></i>
-                        <ul class="dropdown-menu">
-                            <li><a href="/checkin.html">Check-In</a></li>
-                            <li><a id="logoutButton" href="/index.html">
-                                Log Out <i class="entypo-logout right"></i></a>
-                            </li>
-                        </ul>
-                  </div>
+					<a href="/checkin.html">
+						<button class = "btn btn-primary btn-lg" >Check In</button>
+					</a>
+					<a href="/index.html">					
+						<button class = "btn btn-primary btn-lg">Log Out</button>
+					</a>
 				</ul>
 
 			</div>
@@ -148,9 +151,9 @@
 		<hr />
 		<div class="appt-container">
 		<div>
-			<h1 class="page-title">Appointments</h1>   
-   
-       
+			<h1 class="page-title">Appointments</h1>
+
+
 				<table class="table">
 					<thead>
 					<tr>
@@ -194,6 +197,9 @@
 												<label class="col-sm-2 control-label"
 														 for="first-name" >First Name</label>
 												<div class="col-sm-10">
+																								<div id="app-first-warning">
+                           						<label id="input-warning">first name can not be blank</label>
+                        					</div>
 													<input type="text" class="form-control"
 															 id="appt-first" placeholder="First Name"/>
 												</div>
@@ -202,35 +208,53 @@
 												<label class="col-sm-2 control-label"
 														 for="last-name" >Last Name</label>
 												<div class="col-sm-10">
+																									<div id="app-last-warning">
+                            					<label id="input-warning">last name can not be blank</label>
+                        					</div>
 													<input type="text" class="form-control"
 															 id="appt-last" placeholder="Last Name"/>
 												</div>
+
 											</div>
 
 											<div class="form-group">
 												<label class="col-sm-2 control-label"
 														 for="phone-number" >Phone</label>
 												<div class="col-sm-10">
+													<div id="app-number-warning">
+                            							<label id="input-warning">Invalid Phone Number</label>
+                        							</div>
 													<input type="text" class="form-control"
 															 id="appt-number" placeholder="Phone Number"/>
 												</div>
+
+
 											</div>
 
 											<div class="form-group">
 												<label class="col-sm-2 control-label"
 														 for="inputPassword3" >Provider Name</label>
 												<div class="col-sm-10">
+																									<div id="app-provider-warning">
+                            						<label id="input-warning">Provider name can not be blank</label>
+                        						</div>
 													<input type="text" class="form-control"
 															 id="appt-provider" placeholder="Provider Name"/>
 												</div>
+
+
 											</div>
 
 											<div class="form-group">
 												<label class="col-sm-2 control-label"
 														 for="inputPassword3" >Date</label>
 												<div class="col-sm-10">
+																										<div id="app-date-warning">
+                            							<label id="input-warning">Invalid Date</label>
+                        							</div>
 													<input type="text" class="form-control"
-															 id="appt-date" placeholder="Appointment Date"/>
+															 id="appt-date" placeholder="mm/dd/yyyy"/>
+
 												</div>
 											</div>
 
@@ -238,8 +262,11 @@
 												<label class="col-sm-2 control-label"
 														 for="inputPassword3" >Time</label>
 												<div class="col-sm-10">
+																									<div id="app-time-warning">
+                            						<label id="input-warning">Invalid Time</label>
+                        						</div>
 													<input type="text" class="form-control"
-															 id="appt-time" placeholder="Appointment Time"/>
+															 id="appt-time" placeholder="hh:mm"/>
 												</div>
 											</div>
 
@@ -262,7 +289,7 @@
 						</div>
 
 						<div class = "add-button" data-toggle="modal" data-target="#myModal">Add Appointment</div>
-	
+
 		</div>
 
 		<script type = "text/x-handlebars-template" id = "appt-list-template">
@@ -311,16 +338,23 @@
 <script type = "text/javascript" src= "assets/js/handlebars-v4.0.5.js"></script>
 <script type ="text/javascript" src = "assets/native/js/appointments.js"> </script>
 
+<!--Segment-->
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+  analytics.load("lPGulSsKIYLisuhYCYObryPl7vNiDIeZ");
+  analytics.page();
+  }}();
+</script>
+
 
 <!-- JavaScripts initializations and stuff -->
 <script src="assets/js/neon-custom.js"></script>
-
-
 <!-- Demo Settings -->
 <script src="assets/js/neon-demo.js"></script>
-
 <script src="assets/js/socket.io.js"></script>
-
-
+<a title="Web Analytics" href="http://clicky.com/101051427"><img alt="Web Analytics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(101051427); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101051427ns.gif" /></p></noscript>
 </body>
 </html>
