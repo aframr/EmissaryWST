@@ -14,6 +14,9 @@ gulp.task('dist', [
   'copy:bower-components',
   'copy:views',
   'copy:css',
+  'copy:js',
+  'copy:sw',
   'copy:images',
-  'babel'
+  'babel-client',
+  'babel-server'
 ]);

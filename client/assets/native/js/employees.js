@@ -17,7 +17,7 @@ $(document).ready(() => {
   $('.save-btn').click(submitForm);
 
 
-   /** *
+  /** *
      * Makes a get request to display list of employees
      * @param none
      * @returns displays the employee list
@@ -32,13 +32,13 @@ $(document).ready(() => {
       url: `/api/employees/company/${myCompanyId}`,
       success(response) {
         json = response;
-               // console.log(response);
+        // console.log(response);
       },
     });
     return json;
   }
 
-   /** *
+  /** *
      * Makes a post request to update list of employees when adding a new employee
      * @param none
      * @returns updates the employee list
@@ -52,12 +52,12 @@ $(document).ready(() => {
       url: '/api/employees',
       success(response) {
         employees.push(response);
-               // console.log(response);
+        // console.log(response);
       },
     });
   }
 
-     /** *
+  /** *
      * When a patient submits their form
      * @param none
      * @returns updates the employee list
@@ -70,7 +70,7 @@ $(document).ready(() => {
     document.getElementById('employee-form').reset();
   }
 
-    /** *
+  /** *
      * Grabs elements from the check in and puts it into an object
      * @param none
      * @returns new employee object
@@ -79,7 +79,7 @@ $(document).ready(() => {
     const newEmployee = {};
     newEmployee.company_id = myCompanyId;
     newEmployee.role = 'c_employee',
-        newEmployee.first_name = $('#employee-first').val();
+    newEmployee.first_name = $('#employee-first').val();
     newEmployee.last_name = $('#employee-last').val();
     newEmployee.phone_number = $('#employee-number').val();
     newEmployee.email = $('#employee-email').val();
@@ -88,7 +88,7 @@ $(document).ready(() => {
     return newEmployee;
   }
 
-     /** *
+  /** *
      * Find Specific Employee Given Employee ID within the Employee Array
      * @param id
      * @returns {string}
@@ -98,7 +98,7 @@ $(document).ready(() => {
       if (employeeList.hasOwnProperty(employee)) {
         if (employeeList[employee]._id === id) {
           if (DEBUG) // console.log(employeeList[employee]);
-                  { return employeeList[employee]; }
+          { return employeeList[employee]; }
         }
       }
     }
