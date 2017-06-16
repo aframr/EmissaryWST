@@ -1,3 +1,4 @@
+'use strict';
 
 var chai = require('chai');
 var should = chai.should();
@@ -24,58 +25,54 @@ var request = require('supertest');
         });
     });*/
 
+/* it('should GET theme setting', function(done) {
+      Theme.findOne({
+          user_id: "test"
+      }, function(err, theme) {
+          if (err) return done(err);
+          theme.background_img.should.equal('default');
+          theme.form_color.should.equal('default');
+          theme.displayClock.should.equal(false);
+          theme.displayPhone.should.equal(false);
+          theme.displaySignature.should.equal(false);
+          theme.additionalComments.should.equal(false);
+          done();
+      });
+  });*/
 
-  /* it('should GET theme setting', function(done) {
-        Theme.findOne({
-            user_id: "test"
-        }, function(err, theme) {
-            if (err) return done(err);
-            theme.background_img.should.equal('default');
-            theme.form_color.should.equal('default');
-            theme.displayClock.should.equal(false);
-            theme.displayPhone.should.equal(false);
-            theme.displaySignature.should.equal(false);
-            theme.additionalComments.should.equal(false);
-            done();
-        });
-    });*/
+/* it('should update(PUT) theme setting', function(done) {
+     Theme.findOne({
+         user_id: "test"
+     }, function(err, theme) {
+         theme.user_id = "test"; //company or user id
+         theme.form_color = "default";
+         theme.background_img = "default";
+         theme.displayPhone = false;
+         theme.displayClock = true;
+         theme.displaySignature = false;
+         theme.additionalComments = true;
+         theme.save(function(err) {
+             if (err) return done(err);
+             theme.background_img.should.equal('default');
+             theme.form_color.should.equal('default');
+             theme.displayClock.should.equal(true);
+             theme.displayPhone.should.equal(false);
+             theme.displaySignature.should.equal(false);
+             theme.additionalComments.should.equal(true);
+             done();
+         });
+     });
+ });*/
 
-   /* it('should update(PUT) theme setting', function(done) {
-        Theme.findOne({
-            user_id: "test"
-        }, function(err, theme) {
-            theme.user_id = "test"; //company or user id
-            theme.form_color = "default";
-            theme.background_img = "default";
-            theme.displayPhone = false;
-            theme.displayClock = true;
-            theme.displaySignature = false;
-            theme.additionalComments = true;
-            theme.save(function(err) {
-                if (err) return done(err);
-                theme.background_img.should.equal('default');
-                theme.form_color.should.equal('default');
-                theme.displayClock.should.equal(true);
-                theme.displayPhone.should.equal(false);
-                theme.displaySignature.should.equal(false);
-                theme.additionalComments.should.equal(true);
-                done();
-            });
-        });
-    });*/
-
-
-  /* it('should remove(DELETE) theme setting', function(done) {
-        Theme.remove({
-            user_id: "test"
-        }, function(err, theme) {
-            if (err) return done(err);
-            theme.should.equal(1);
-            done();
-        });
-
-    });
-
+/* it('should remove(DELETE) theme setting', function(done) {
+      Theme.remove({
+          user_id: "test"
+      }, function(err, theme) {
+          if (err) return done(err);
+          theme.should.equal(1);
+          done();
+      });
+   });
 });*/
 
 //Route Tests need to be changed to work with auth
@@ -242,11 +239,9 @@ describe('Themes Route Test', () => {
     });
   });*/
 
-
- /* after((done) => {
-    // give cleanupAuth the email of the admin user it created earlier.
-    ConfigureAuth.cleanupAuth(credentials.email, done);
-  });
+/* after((done) => {
+   // give cleanupAuth the email of the admin user it created earlier.
+   ConfigureAuth.cleanupAuth(credentials.email, done);
+ });
 },
 );*/
-
