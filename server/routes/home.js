@@ -1,17 +1,20 @@
-'use strict';
+
 
 /* This module is strictly meant for one route. This route
  * is responsible for rendering our angular app home page.
  */
-var express = require('express');
-var path = require('path');
-var router = express.Router();
+const express = require('express');
+const path = require('path');
+const router = express.Router();
+var bodyParser = require('body-parser');
+var Company = require('../models/Company');
+router.use(bodyParser.json());
 
 /**
  * GET /
  * Render out angular app.
  */
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/visitors.html'));
 });
 
@@ -219,6 +222,3 @@ function validateCompany(company_name){
     }); 
 }*/
 module.exports = router;
-
-
-

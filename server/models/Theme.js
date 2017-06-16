@@ -1,8 +1,6 @@
-'use strict';
-
-//monggose set up
-var mongoose = require('mongoose');
-var Schema =  mongoose.Schema;
+// monggose set up
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 //Schema for user theme settings
 var ThemeSchema   = new Schema({
@@ -18,7 +16,8 @@ var ThemeSchema   = new Schema({
     field3: String,
     field4: String,
     field5: String
+
 });
 
-//Export schema
+// Export schema
 module.exports = mongoose.model('Theme', ThemeSchema);

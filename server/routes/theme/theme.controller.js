@@ -1,28 +1,29 @@
-'use strict';
+
 
 /*
  * This module is meant to house all of the API
  * routes that pertain to theme settings
  */
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* need this to enable cross origin resource sharing.If disabled, we might
  * not need this later. This is just to get the example to work
  * when front end is served from a something other than our app server.
  */
-var cors = require('cors');
+const cors = require('cors');
 
-var Theme = require('../../models/Theme');
+const Theme = require('../../models/Theme');
 
-/*********************** THEME TEMPLATE ROUTES ***********************/
+/** ********************* THEME TEMPLATE ROUTES ***********************/
 module.exports.template = {};
 
-module.exports.template.use = function(req, res, next) {
-    // do logging
-    console.log('Intializing.....');
-    next();
+module.exports.template.use = function (req, res, next) {
+  // do logging
+  console.log('Intializing.....');
+  next();
 };
+
 
 module.exports.template.create = function(req, res) {
     var theme = new Theme();
@@ -41,32 +42,27 @@ module.exports.template.create = function(req, res) {
 
     theme.save(function(err) {
         if (err)
-            res.status(400).send(err);
-
-        res.status(200).json(theme);
-    });
-
-};
-
-module.exports.template.get = function(req, res) {
-    Theme.findOne({
-        user_id: req.params.user_id
-    }, function(err, theme) {
-        if (err)
-            res.status(400).send(err);
+            {res.status(400).send(err);}
 
         res.status(200).json(theme);
     });
 };
 
-module.exports.template.update = function(req, res) {
+module.exports.template.get = function (req, res) {
+  Theme.findOne({
+    user_id: req.params.user_id,
+  }, (err, theme) => {
+    if (err) { res.status(400).send(err); }
 
-    Theme.findOne({
-        user_id: req.params.user_id
-    }, function(err, theme) {
+    res.status(200).json(theme);
+  });
+};
 
-        if (err)
-            res.status(400).send(err);
+module.exports.template.update = function (req, res) {
+  Theme.findOne({
+    user_id: req.params.user_id,
+  }, (err, theme) => {
+    if (err) { res.status(400).send(err); }
 
         theme.user_id = req.params.user_id; //company or user id
         if (req.body.form_color)
@@ -92,26 +88,20 @@ module.exports.template.update = function(req, res) {
         if (req.body.field5)
             theme.field5 = req.body.field5;
 
-        theme.save(function(err) {
-            if (err)
-                res.status(400).send(err);
+    theme.save((err) => {
+      if (err) { res.status(400).send(err); }
 
-            res.status(200).json(theme);
-        });
-
+      res.status(200).json(theme);
     });
+  });
 };
 
-module.exports.template.delete = function(req, res) {
+module.exports.template.delete = function (req, res) {
+  Theme.remove({
+    user_id: req.params.user_id,
+  }, (err, theme) => {
+    if (err) { res.status(400).send(err); }
 
-    Theme.remove({
-        user_id: req.params.user_id
-    }, function(err, theme) {
-        if (err)
-            res.status(400).send(err);
-
-        res.status(200).json({msg: "OK"});
-    });
-
-
+    res.status(200).json({ msg: 'OK' });
+  });
 };

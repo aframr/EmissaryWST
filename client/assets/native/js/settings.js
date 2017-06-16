@@ -14,17 +14,17 @@ $(document).ready(() => {
   const compiledHtml = template(employees);
 
 
-   // Pre-fill in current user information
+  // Pre-fill in current user information
   document.getElementsByTagName('input')[0].setAttribute('value', curUser.first_name);
   document.getElementsByTagName('input')[1].setAttribute('value', curUser.last_name);
   document.getElementsByTagName('input')[2].setAttribute('value', curUser.phone_number);
   document.getElementsByTagName('input')[3].setAttribute('value', curUser.email);
 
-   // Pulls up form to change employee info
+  // Pulls up form to change employee info
   $('.update-btn').click(updateEmployeeInfo);
   $('#setting-list').html(compiledHtml);
 
-   /** *
+  /** *
     * Makes a get request to display list of employees
     * @param none
     * @returns displays the employee list
@@ -45,7 +45,7 @@ $(document).ready(() => {
     return json;
   }
 
-   /** *
+  /** *
     * Grabs elements from the check in and puts it into an object
     * @param none
     * @returns new employee object
@@ -59,7 +59,7 @@ $(document).ready(() => {
     return newEmployee;
   }
 
-   /** *
+  /** *
     * Update the current employee information
     * @param id
     * @returns {string}
@@ -72,7 +72,7 @@ $(document).ready(() => {
     document.getElementById('settings-form').reset();
   }
 
-   /** *
+  /** *
     * Makes a put request to update info of employee
     * @param obj
     * @returns updates the employee's information
