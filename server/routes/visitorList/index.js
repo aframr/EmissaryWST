@@ -1,9 +1,9 @@
+'use strict';
 
+var express = require('express');
+var controller = require('./visitorList.controller');
 
-const express = require('express');
-const controller = require('./visitorList.controller');
-
-const router = express.Router();
+var router = express.Router();
 
 router.post('/', controller.createReq);
 router.get('/company/:id', controller.getCompanyVisitorListReq);

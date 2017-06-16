@@ -1,43 +1,40 @@
-const request = require('supertest');
+'use strict';
 
-const config = require('../config/config');
+var request = require('supertest');
+
+var config = require('../config/config');
 
 // Wrapper that creates admin user to allow api calls
-const ConfigureAuth = require('./ConfigureAuth');
-
+var ConfigureAuth = require('./ConfigureAuth');
 
 // Test data
-const templateForm = {
+var templateForm = {
   form_id: 1,
   form_name: 'My Form',
-  form_fields: [
-    {
-      field_id: 1,
-      field_title: 'Name',
-      field_type: 'textfield',
-      field_value: '',
-      field_required: true,
-      field_disabled: false,
-    },
-    {
-      field_id: 3,
-      field_title: 'Email',
-      field_type: 'email',
-      field_value: '',
-      field_required: true,
-      field_disabled: false,
-    },
-    {
-      field_id: 4,
-      field_title: 'Are you sick',
-      field_type: 'checkbox',
-      field_value: '',
-      field_required: true,
-      field_disabled: false,
-    },
-  ],
+  form_fields: [{
+    field_id: 1,
+    field_title: 'Name',
+    field_type: 'textfield',
+    field_value: '',
+    field_required: true,
+    field_disabled: false
+  }, {
+    field_id: 3,
+    field_title: 'Email',
+    field_type: 'email',
+    field_value: '',
+    field_required: true,
+    field_disabled: false
+  }, {
+    field_id: 4,
+    field_title: 'Are you sick',
+    field_type: 'checkbox',
+    field_value: '',
+    field_required: true,
+    field_disabled: false
+  }]
 };
-const submittedForm = {
+var submittedForm = {
   form_id: '1',
   form_name: 'My Test Form',
   form_fields: {
@@ -47,7 +44,7 @@ const submittedForm = {
       field_type: 'textfield',
       field_value: 'John',
       field_required: true,
-      field_disabled: false,
+      field_disabled: false
     },
     2: {
       field_id: 2,
@@ -55,7 +52,7 @@ const submittedForm = {
       field_type: 'textfield',
       field_value: 'Doe',
       field_required: true,
-      field_disabled: false,
+      field_disabled: false
     },
     3: {
       field_id: 3,
@@ -64,18 +61,15 @@ const submittedForm = {
       field_value: '1',
       field_required: true,
       field_disabled: false,
-      field_options: [
-        {
-          option_id: 1,
-          option_title: 'Male',
-          option_value: 1,
-        },
-        {
-          option_id: 2,
-          option_title: 'Female',
-          option_value: 2,
-        },
-      ],
+      field_options: [{
+        option_id: 1,
+        option_title: 'Male',
+        option_value: 1
+      }, {
+        option_id: 2,
+        option_title: 'Female',
+        option_value: 2
+      }]
     },
     4: {
       field_id: 4,
@@ -83,7 +77,7 @@ const submittedForm = {
       field_type: 'email',
       field_value: 'test@example.com',
       field_required: true,
-      field_disabled: false,
+      field_disabled: false
     },
     5: {
       field_id: 5,
@@ -91,7 +85,7 @@ const submittedForm = {
       field_type: 'password',
       field_value: 'hello',
       field_required: true,
-      field_disabled: false,
+      field_disabled: false
     },
     6: {
       field_id: 6,
@@ -99,7 +93,7 @@ const submittedForm = {
       field_type: 'date',
       field_value: '01.21.1980',
       field_required: true,
-      field_disabled: false,
+      field_disabled: false
     },
     7: {
       field_id: 7,
@@ -108,28 +102,23 @@ const submittedForm = {
       field_value: '3',
       field_required: false,
       field_disabled: false,
-      field_options: [
-        {
-          option_id: 1,
-          option_title: '-- Please Select --',
-          option_value: 1,
-        },
-        {
-          option_id: 2,
-          option_title: 'Internet Explorer',
-          option_value: 2,
-        },
-        {
-          option_id: 3,
-          option_title: 'Google Chrome',
-          option_value: 3,
-        },
-        {
-          option_id: 4,
-          option_title: 'Mozilla Firefox',
-          option_value: 4,
-        },
-      ],
+      field_options: [{
+        option_id: 1,
+        option_title: '-- Please Select --',
+        option_value: 1
+      }, {
+        option_id: 2,
+        option_title: 'Internet Explorer',
+        option_value: 2
+      }, {
+        option_id: 3,
+        option_title: 'Google Chrome',
+        option_value: 3
+      }, {
+        option_id: 4,
+        option_title: 'Mozilla Firefox',
+        option_value: 4
+      }]
     },
     8: {
       field_id: 8,
@@ -137,7 +126,7 @@ const submittedForm = {
       field_type: 'textarea',
       field_value: 'test',
       field_required: false,
-      field_disabled: false,
+      field_disabled: false
     },
     9: {
       field_id: 9,
@@ -145,7 +134,7 @@ const submittedForm = {
       field_type: 'checkbox',
       field_value: '1',
       field_required: true,
-      field_disabled: false,
+      field_disabled: false
     },
     10: {
       field_id: 10,
@@ -153,162 +142,135 @@ const submittedForm = {
       field_type: 'hidden',
       field_value: 'X',
       field_required: false,
-      field_disabled: false,
-    },
+      field_disabled: false
+    }
   },
-  submitted: true,
+  submitted: true
 };
 
+describe('Forms', function () {
+  var url = 'localhost:' + config.port;
 
-describe('Forms', () => {
-  const url = `localhost:${config.port}`;
+  var credentials = void 0;
 
-  let credentials;
-
-  before((done) => {
-    ConfigureAuth.setupAdmin((cred) => {
+  before(function (done) {
+    ConfigureAuth.setupAdmin(function (cred) {
       credentials = cred;
       done();
     });
   });
 
-
   /** ******** TEMPLATE TESTING **********/
 
-  let templateFormId = null;
-  describe('Form Templates', () => {
-    describe('POST /api/form/template', () => {
-      it('should save the template', (done) => {
-        request(url)
-          .post('/api/form/template')
-          .query({ email: credentials.email, token: credentials.token, isAdmin: true })
-          .expect(200)
-          .send({
-            _admin_id: credentials.admin._id,
-            template: templateForm,
-          })
-          .end((err, res) => {
-            templateFormId = res.body._id;
-            res.body.should.have.property('_admin_id').and.be.equal(`${credentials.admin._id}`);
-            res.body.should.have.property('template').and.be.instanceof(Object);
-            done();
-          });
+  var templateFormId = null;
+  describe('Form Templates', function () {
+    describe('POST /api/form/template', function () {
+      it('should save the template', function (done) {
+        request(url).post('/api/form/template').query({ email: credentials.email, token: credentials.token, isAdmin: true }).expect(200).send({
+          _admin_id: credentials.admin._id,
+          template: templateForm
+        }).end(function (err, res) {
+          templateFormId = res.body._id;
+          res.body.should.have.property('_admin_id').and.be.equal('' + credentials.admin._id);
+          res.body.should.have.property('template').and.be.instanceof(Object);
+          done();
+        });
       });
     });
 
-    describe('GET /api/form/template/company/:id', () => {
-      it('Should respond with company template data', (done) => {
-        request(url)
-          .get(`/api/form/template/company/${credentials.admin._id}`)
-          .query({ email: credentials.email, token: credentials.token, isAdmin: true })
-          .end((err, res) => {
-            res.body.should.have.property('_id');
-            res.body.should.have.property('_admin_id');
-            res.body.should.have.property('template').and.be.instanceof(Object);
+    describe('GET /api/form/template/company/:id', function () {
+      it('Should respond with company template data', function (done) {
+        request(url).get('/api/form/template/company/' + credentials.admin._id).query({ email: credentials.email, token: credentials.token, isAdmin: true }).end(function (err, res) {
+          res.body.should.have.property('_id');
+          res.body.should.have.property('_admin_id');
+          res.body.should.have.property('template').and.be.instanceof(Object);
 
-            res.body.template.should.deep.equal(templateForm);
-            res.body._id.should.equal(templateFormId);
-            done();
-          });
+          res.body.template.should.deep.equal(templateForm);
+          res.body._id.should.equal(templateFormId);
+          done();
+        });
       });
     });
 
-    describe('DELETE /api/form/template/:template_id', () => {
-      it('Should delete the template data', (done) => {
-        request(url)
-          .delete(`/api/form/template/${templateFormId}`)
-          .query({ email: credentials.email, token: credentials.token, isAdmin: true })
-          .end((err, res) => {
-            res.body.should.have.property('_id');
-            res.body.should.have.property('_admin_id');
-            res.body.should.have.property('template').and.be.instanceof(Object);
+    describe('DELETE /api/form/template/:template_id', function () {
+      it('Should delete the template data', function (done) {
+        request(url).delete('/api/form/template/' + templateFormId).query({ email: credentials.email, token: credentials.token, isAdmin: true }).end(function (err, res) {
+          res.body.should.have.property('_id');
+          res.body.should.have.property('_admin_id');
+          res.body.should.have.property('template').and.be.instanceof(Object);
 
-            res.body.template.should.deep.equal(templateForm);
-            res.body._id.should.equal(templateFormId);
-            done();
-          });
+          res.body.template.should.deep.equal(templateForm);
+          res.body._id.should.equal(templateFormId);
+          done();
+        });
       });
     });
   });
-
 
   /** ******** PATIENT FORM TESTING **********/
 
-
-  describe('Submitted Forms', () => {
-    describe('POST /api/form/visitorList', () => {
-      it('should save submitted form', (done) => {
-        request(url)
-          .post('/api/form/visitorList')
-          .query({ email: credentials.email, token: credentials.token, isAdmin: true })
-          .send({
-            _admin_id: credentials.admin._id,
-            form: submittedForm,
-            firstName: 'Jimbo',
-            lastName: 'Cruise',
-            patientEmail: 'jcruise@tomcruise.com',
-          })
-          .end((err, res) => {
-            // console.log(err);
-            // console.log(res);
-            res.body.should.have.property('form').and.be.instanceof(Object);
-            res.body.should.have.property('_admin_id').and.be.equal(`${credentials.admin._id}`);
-            submittedFormId = res.body._id;
-            submittedFormFirstName = res.body.firstName;
-            submittedFormLastName = res.body.lastName;
-            submittedFormEmail = res.body.patientEmail;
-            done();
-          });
+  describe('Submitted Forms', function () {
+    describe('POST /api/form/visitorList', function () {
+      it('should save submitted form', function (done) {
+        request(url).post('/api/form/visitorList').query({ email: credentials.email, token: credentials.token, isAdmin: true }).send({
+          _admin_id: credentials.admin._id,
+          form: submittedForm,
+          firstName: 'Jimbo',
+          lastName: 'Cruise',
+          patientEmail: 'jcruise@tomcruise.com'
+        }).end(function (err, res) {
+          // console.log(err);
+          // console.log(res);
+          res.body.should.have.property('form').and.be.instanceof(Object);
+          res.body.should.have.property('_admin_id').and.be.equal('' + credentials.admin._id);
+          submittedFormId = res.body._id;
+          submittedFormFirstName = res.body.firstName;
+          submittedFormLastName = res.body.lastName;
+          submittedFormEmail = res.body.patientEmail;
+          done();
+        });
       });
     });
 
-    describe('GET /api/form/:form_id', () => {
-      it('should respond with submitted form data', (done) => {
-        request(url)
-          .get(`/api/form/visitorList/${submittedFormId}`)
-          .query({ email: credentials.email, token: credentials.token, isAdmin: true })
-          .end((err, res) => {
-            res.body.should.have.property('_id');
-            res.body.should.have.property('firstName');
-            res.body.should.have.property('lastName');
-            res.body.should.have.property('patientEmail');
-            res.body.should.have.property('_admin_id');
-            res.body.should.have.property('date');
-            res.body.should.have.property('form').and.be.instanceof(Object);
+    describe('GET /api/form/:form_id', function () {
+      it('should respond with submitted form data', function (done) {
+        request(url).get('/api/form/visitorList/' + submittedFormId).query({ email: credentials.email, token: credentials.token, isAdmin: true }).end(function (err, res) {
+          res.body.should.have.property('_id');
+          res.body.should.have.property('firstName');
+          res.body.should.have.property('lastName');
+          res.body.should.have.property('patientEmail');
+          res.body.should.have.property('_admin_id');
+          res.body.should.have.property('date');
+          res.body.should.have.property('form').and.be.instanceof(Object);
 
-            res.body.form.should.deep.equal(submittedForm);
-            res.body._id.should.equal(submittedFormId);
-            done();
-          });
+          res.body.form.should.deep.equal(submittedForm);
+          res.body._id.should.equal(submittedFormId);
+          done();
+        });
       });
     });
 
-    describe('GET /api/form/', () => {
-      it('should respond with submitted form data', (done) => {
-        request(url)
-          .get('/api/form/visitorList/')
-          .query({ firstName: submittedFormFirstName, lastName: submittedFormLastName, patientEmail: submittedFormEmail })
-          .end((err, res) => {
-            res.body.should.have.property('firstName');
-            res.body.should.have.property('lastName');
-            res.body.should.have.property('patientEmail');
-            res.body.should.have.property('_admin_id');
-            res.body.should.have.property('date');
-            res.body.should.have.property('form').and.be.instanceof(Object);
+    describe('GET /api/form/', function () {
+      it('should respond with submitted form data', function (done) {
+        request(url).get('/api/form/visitorList/').query({ firstName: submittedFormFirstName, lastName: submittedFormLastName, patientEmail: submittedFormEmail }).end(function (err, res) {
+          res.body.should.have.property('firstName');
+          res.body.should.have.property('lastName');
+          res.body.should.have.property('patientEmail');
+          res.body.should.have.property('_admin_id');
+          res.body.should.have.property('date');
+          res.body.should.have.property('form').and.be.instanceof(Object);
 
-            res.body.form.should.deep.equal(submittedForm);
-            res.body.patientEmail.should.equal(submittedFormEmail);
-            res.body.firstName.should.equal(submittedFormFirstName);
-            res.body.lastName.should.equal(submittedFormLastName);
-            done();
-          });
+          res.body.form.should.deep.equal(submittedForm);
+          res.body.patientEmail.should.equal(submittedFormEmail);
+          res.body.firstName.should.equal(submittedFormFirstName);
+          res.body.lastName.should.equal(submittedFormLastName);
+          done();
+        });
       });
     });
   });
 
-
-  after((done) => {
+  after(function (done) {
     ConfigureAuth.cleanupAuth(credentials.email, done);
   });
-},
-);
+});

@@ -1,11 +1,12 @@
-let Authmodel = require('../models/Company'),
-  config = require('../config/config'),
-  jwt = require('jwt-simple');
+'use strict';
 
+var Authmodel = require('../models/Company'),
+    config = require('../config/config'),
+    jwt = require('jwt-simple');
 
 module.exports = function (req, res, next) {
-  let token,
-    email;
+  var token = void 0,
+      email = void 0;
 
   /* Get token from http header */
   token = req.header('token');
@@ -22,7 +23,7 @@ module.exports = function (req, res, next) {
     return res.status(401).send('Invalid token');
   }
 
-  Authmodel.findOne({ email }, (err, user) => {
+  Authmodel.findOne({ email: email }, function (err, user) {
     // if there are any errors, return the error before anything else
     if (err) {
       return res.status(500).send(err);

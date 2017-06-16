@@ -4,6 +4,7 @@
  * This module is meant to house all of the API
  * routes that pertain to users
  */
+
 var _exports = module.exports;
 
 var Employee = require('../../models/Employee');

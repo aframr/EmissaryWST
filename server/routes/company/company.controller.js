@@ -1,4 +1,4 @@
-
+'use strict';
 
 /* This module is meant to house the functions
  * used by the authorization (auth) API. The
@@ -10,15 +10,14 @@
  authResetCredentials()
  */
 
-
-const config = require('../../config/config');
+var config = require('../../config/config');
 
 /* need this to enable cross origin resource sharing.If disabled, we might
  * not need this later. This is just to get the example to work
  * when front end is served from a something other than our app server.
  */
-const Company = require('../../models/Company');
-const jwt = require('jwt-simple');
+var Company = require('../../models/Company');
+var jwt = require('jwt-simple');
 
 /** **** Company TEMPLATE ROUTES ******/
 module.exports.template = {};
@@ -53,7 +52,7 @@ module.exports.template = {};
  *   }
  */
 module.exports.template.create = function (req, res) {
-  const company = new Company();
+  var company = new Company();
 
   // require provided info
   company.email = req.body.email;
@@ -66,8 +65,7 @@ module.exports.template.create = function (req, res) {
     company.credit_card_number=req.body.credit_card_number;
     */
 
-
-  company.save((err, c) => {
+  company.save(function (err, c) {
     if (err) {
       return res.status(400).json({ error: 'Could Not Save' });
     }
@@ -110,23 +108,23 @@ module.exports.template.create = function (req, res) {
  *   }
  */
 module.exports.template.getAll = function (req, res) {
-  Company.find({},
-    {
-      credit_card_number: false,
-      expiration_date: false,
+  Company.find({}, {
+    credit_card_number: false,
+    expiration_date: false
+  }, function (err, result) {
+    if (err) {
+      return res.status(400).json(err);
     }
-    , (err, result) => {
-      if (err) {
-        return res.status(400).json(err);
-      }
-      return res.status(200).json(result);
-    });
+    return res.status(200).json(result);
+  });
 };
 
 /** authLogin- logs in a user*/
 module.exports.template.get = function (req, res) {
-  Company.findOne({ _id: req.params.id }, (err, company) => {
-    if (err) { return res.status(400).json({ error: 'Could Not Save' }); }
+  Company.findOne({ _id: req.params.id }, function (err, company) {
+    if (err) {
+      return res.status(400).json({ error: 'Could Not Save' });
+    }
     return res.status(200).json(showCompanyPublicInfo(company));
   });
 };
@@ -157,19 +155,27 @@ module.exports.template.get = function (req, res) {
  *   }
  */
 module.exports.template.update = function (req, res) {
-  Company.findOne({ _id: req.params.id }, (err, c) => {
-    if (err || !c) { return res.status(401).json({ error: 'Could Not Find' }); }
+  Company.findOne({ _id: req.params.id }, function (err, c) {
+    if (err || !c) {
+      return res.status(401).json({ error: 'Could Not Find' });
+    }
 
     // update email
-    if (req.body.email !== undefined) { c.email = req.body.email; }
+    if (req.body.email !== undefined) {
+      c.email = req.body.email;
+    }
 
     // update company name
-    if (req.body.name !== undefined) { c.name = req.body.name; }
+    if (req.body.name !== undefined) {
+      c.name = req.body.name;
+    }
 
     // update company's phone number
-    if (req.body.phone_number !== undefined) { c.phone_number = req.body.phone_number; }
+    if (req.body.phone_number !== undefined) {
+      c.phone_number = req.body.phone_number;
+    }
 
-    c.save((err) => {
+    c.save(function (err) {
       if (err) {
         return res.status(400).json({ error: 'Could Not Save' });
       }
@@ -204,9 +210,11 @@ module.exports.template.update = function (req, res) {
  *   }
  */
 module.exports.template.delete = function (req, res) {
-  Company.findById(req.params.id, (err, c) => {
-    if (err) { res.status(400).json({ error: 'Could Not Find' }); }
-    c.remove((err) => {
+  Company.findById(req.params.id, function (err, c) {
+    if (err) {
+      res.status(400).json({ error: 'Could Not Find' });
+    }
+    c.remove(function (err) {
       if (err) {
         res.status(400).json({ error: 'Could Not Save' });
       } else {
@@ -218,27 +226,38 @@ module.exports.template.delete = function (req, res) {
 
 /** authResetCredentials- resets a user's credentials*/
 module.exports.template.resetCredentials = function (req, res) {
-  Company.findOne({ email: req.params.user }, (err, c) => {
-    if (err || !c) { return res.status(400).json({ error: 'Could Not Find' }); }
-
+  Company.findOne({ email: req.params.user }, function (err, c) {
+    if (err || !c) {
+      return res.status(400).json({ error: 'Could Not Find' });
+    }
 
     // if the user is found but the password is wrong
-    if (!c.validPassword(req.body.password)) { return res.status(400).send('loginMessage', 'Oops! Wrong password'); }
+    if (!c.validPassword(req.body.password)) {
+      return res.status(400).send('loginMessage', 'Oops! Wrong password');
+    }
     // update password
 
     // upadate password
-    if (req.body.newpassword !== undefined) { c.password = c.generateHash(req.body.newpassword); }
+    if (req.body.newpassword !== undefined) {
+      c.password = c.generateHash(req.body.newpassword);
+    }
 
     // update email
-    if (req.body.newemail !== undefined) { c.email = req.body.newemail; }
+    if (req.body.newemail !== undefined) {
+      c.email = req.body.newemail;
+    }
 
     // update company name
-    if (req.body.new_company_name !== undefined) { c.company_name = req.body.new_company_name; }
+    if (req.body.new_company_name !== undefined) {
+      c.company_name = req.body.new_company_name;
+    }
 
     // update company's phone number
-    if (req.body.new_company_phone_number !== undefined) { c.company_phone_number = req.body.new_company_phone_number; }
+    if (req.body.new_company_phone_number !== undefined) {
+      c.company_phone_number = req.body.new_company_phone_number;
+    }
 
-    c.save((err) => {
+    c.save(function (err) {
       if (err) {
         res.status(400).send({ error: 'Could Not Save' });
       }
@@ -253,6 +272,6 @@ function showCompanyPublicInfo(c) {
     name: c.name,
     email: c.email,
     phone_number: c.phone_number,
-    paid_time: c.paid_time,
+    paid_time: c.paid_time
   };
 }

@@ -5,6 +5,7 @@
  */
 
 /* Require mongoose to interact with mongoDB */
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 /*

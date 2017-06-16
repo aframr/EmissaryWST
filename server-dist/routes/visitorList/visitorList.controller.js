@@ -352,6 +352,10 @@ exports.create = function (param, callback) {
   var last_name = param.last_name;
   var phone_number = param.phone_number;
   var checkin_time = param.checkin_time;
+  var label1 = param.label1;
+  var label2 = param.label2;
+  var field1 = param.field1;
+  var field2 = param.field2;
 
   // optional dic var
   var additional_info = param.additional_info;
@@ -381,7 +385,11 @@ exports.create = function (param, callback) {
       phone_number: phone_number,
       checkin_time: checkin_time,
       additional_info: additional_info,
-      appointments: appointments
+      appointments: appointments,
+      label1: label1,
+      label2: label2,
+      field1: field1,
+      field2: field2
     };
 
     VisitorList.findOne({ company_id: company_id }, function (err, list) {
@@ -394,6 +402,9 @@ exports.create = function (param, callback) {
         list.company_id = company_id;
       }
       list.visitors.push(visitor);
+      console.log("this is visitor: ");
+      console.log(visitor);
+
       list.save(function (err) {
         if (err) return callback({ error: 'an error in saving' }, null);
         Company.findById(company_id, function (err, user) {

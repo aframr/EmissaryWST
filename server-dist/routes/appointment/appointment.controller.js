@@ -14,6 +14,7 @@
  * not need this later. This is just to get the example to work
  * when front end is served from a something other than our app server.
  */
+
 var Appointment = require('../../models/Appointment');
 
 /** **** Company TEMPLATE ROUTES ******/

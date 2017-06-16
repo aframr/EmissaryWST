@@ -3,6 +3,7 @@
 /**
  * Created by kevingu on 2/26/16.
  */
+
 var io = require('socket.io-client');
 var config = require('../config/config');
 var Company = require('../models/Company');

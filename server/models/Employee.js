@@ -1,14 +1,14 @@
-
+'use strict';
 
 /* Require mongoose to interact with mongoDB */
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt-nodejs');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var bcrypt = require('bcrypt-nodejs');
 
 /*
  * Employee schema
  */
-const employeeSchema = mongoose.Schema({
+var employeeSchema = mongoose.Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   email: { type: String, unique: true, index: true, required: true },
@@ -16,7 +16,7 @@ const employeeSchema = mongoose.Schema({
   phone_number: { type: String, required: true },
   role: { type: String, required: true },
   company_id: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
-  company_name: { type: String },
+  company_name: { type: String }
 });
 // checking if password is valid
 employeeSchema.methods.validPassword = function (password) {

@@ -29,7 +29,11 @@ var visitorSchema = new Schema({
   phone_number: { type: String, required: true },
   checkin_time: { type: Date, default: Date.now, required: true },
   appointments: { type: [appointmentSchema] },
-  additional_info: {}
+  additional_info: {},
+  label1: { type: String, default: "" },
+  label2: { type: String, default: "" },
+  field1: { type: String, default: "" },
+  field2: { type: String, default: "" }
 });
 
 var visitorListSchema = new Schema({

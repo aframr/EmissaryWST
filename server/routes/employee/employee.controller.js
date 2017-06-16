@@ -1,13 +1,12 @@
-
+'use strict';
 
 /*
  * This module is meant to house all of the API
  * routes that pertain to users
  */
-const exports = module.exports;
+var _exports = module.exports;
 
-const Employee = require('../../models/Employee');
-
+var Employee = require('../../models/Employee');
 
 /**
  * @api {post} /api/employees/login Employee Login
@@ -41,18 +40,19 @@ const Employee = require('../../models/Employee');
  *     error: "Incorrect Credentials"
  *   }
  */
-exports.login = function (req, res) {
-  Employee.findOne({ email: req.body.email }, (err, e) => {
+_exports.login = function (req, res) {
+  Employee.findOne({ email: req.body.email }, function (err, e) {
     if (err || !e) {
       return res.status(400).send({ error: 'Can not Find' });
     }
-    if (!e.validPassword(req.body.password)) { return res.status(400).send({ error: 'Incorrect Credentials' }); }
-    const employee_json = e.toJSON();
+    if (!e.validPassword(req.body.password)) {
+      return res.status(400).send({ error: 'Incorrect Credentials' });
+    }
+    var employee_json = e.toJSON();
     delete employee_json.password;
     return res.status(200).json(employee_json);
   });
 };
-
 
 /**
  * @api {get} /api/employees/company/:id Gets all employees
@@ -88,8 +88,8 @@ exports.login = function (req, res) {
  *     error: "Incorrect Credentials"
  *   }
  */
-exports.getAllEmployees = function (req, res) {
-  Employee.find({ company_id: req.params.id }, { password: 0 }, (err, result) => {
+_exports.getAllEmployees = function (req, res) {
+  Employee.find({ company_id: req.params.id }, { password: 0 }, function (err, result) {
     if (err) {
       return res.status(400).send({ error: 'Can not Find' });
     }
@@ -128,8 +128,8 @@ exports.getAllEmployees = function (req, res) {
  *     error: "Incorrect Credentials"
  *   }
  */
-exports.getById = function (req, res) {
-  Employee.findById(req.params.id, { password: 0 }, (err, employee) => {
+_exports.getById = function (req, res) {
+  Employee.findById(req.params.id, { password: 0 }, function (err, employee) {
     if (err) {
       return res.status(400).json({ error: 'Can not Find' });
     }
@@ -175,29 +175,24 @@ exports.getById = function (req, res) {
  *     error: "email taken"
  *   }
  */
-exports.insert = function (req, res) {
-  const employee = new Employee();
+_exports.insert = function (req, res) {
+  var employee = new Employee();
 
   /* required info */
   employee.first_name = req.body.first_name;
   employee.last_name = req.body.last_name;
-  employee.email = req.body.email,
-  employee.phone_number = req.body.phone_number,
-  employee.company_id = req.body.company_id,
-  employee.password = employee.generateHash(req.body.password),
-  employee.role = req.body.role;
+  employee.email = req.body.email, employee.phone_number = req.body.phone_number, employee.company_id = req.body.company_id, employee.password = employee.generateHash(req.body.password), employee.role = req.body.role;
   employee.company_name = req.body.company_name;
 
-  employee.save((err, e) => {
+  employee.save(function (err, e) {
     if (err) {
       return res.status(400).json({ error: 'Can not Save' });
     }
-    const employee_json = e.toJSON();
+    var employee_json = e.toJSON();
     delete employee_json.password;
     return res.status(200).json(employee_json);
   });
 };
-
 
 /**
  * @api {put} /api/employees Updates employee
@@ -231,9 +226,11 @@ exports.insert = function (req, res) {
  *     error: "Incorrect Credentials"
  *   }
  */
-exports.update = function (req, res) {
-  Employee.findById(req.params.id, (err, employee) => {
-    if (err) { return res.status(400).json({ error: 'Can not Update' }); }
+_exports.update = function (req, res) {
+  Employee.findById(req.params.id, function (err, employee) {
+    if (err) {
+      return res.status(400).json({ error: 'Can not Update' });
+    }
 
     employee.first_name = req.body.first_name || employee.first_name;
     employee.last_name = req.body.last_name || employee.last_name;
@@ -242,11 +239,13 @@ exports.update = function (req, res) {
     employee.password = employee.generateHash(req.body.password) || employee.password;
     employee.role = req.body.role || employee.role;
 
-    employee.save((err) => {
+    employee.save(function (err) {
       console.log(err);
       console.log(employee);
-      if (err) { return res.status(400).json({ error: 'Can not Save' }); }
-      const employee_json = employee.toJSON();
+      if (err) {
+        return res.status(400).json({ error: 'Can not Save' });
+      }
+      var employee_json = employee.toJSON();
       delete employee_json.password;
       return res.status(200).send(employee_json);
     });
@@ -280,14 +279,16 @@ exports.update = function (req, res) {
  *     error: "Incorrect Credentials"
  *   }
  */
-exports.delete = function (req, res) {
-  Employee.findById(req.params.id, (err, employee) => employee.remove((err) => {
-    if (err) {
-      res.status(400).json({ error: 'Can not Find' });
-    } else {
-      const employee_json = employee.toJSON();
-      delete employee_json.password;
-      return res.status(200).send(employee_json);
-    }
-  }));
+_exports.delete = function (req, res) {
+  Employee.findById(req.params.id, function (err, employee) {
+    return employee.remove(function (err) {
+      if (err) {
+        res.status(400).json({ error: 'Can not Find' });
+      } else {
+        var employee_json = employee.toJSON();
+        delete employee_json.password;
+        return res.status(200).send(employee_json);
+      }
+    });
+  });
 };

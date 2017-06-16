@@ -1,27 +1,28 @@
+'use strict';
+
 /**
  * Created by kevingu on 2/23/16.
  */
 
-
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 // TODO figure out why I need this
 mongoose.models = {};
 mongoose.modelSchemas = {};
 
-const Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 /*
  * Appointment schema
  */
-const appointmentSchema = mongoose.Schema({
+var appointmentSchema = mongoose.Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   phone_number: { type: String, required: true },
   date: { type: Date, required: true },
   provider_name: { type: String, required: true },
-  company_id: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
+  company_id: { type: Schema.Types.ObjectId, ref: 'Company', required: true }
 });
 
-const visitorSchema = new Schema({
+var visitorSchema = new Schema({
   company_id: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
@@ -29,14 +30,15 @@ const visitorSchema = new Schema({
   checkin_time: { type: Date, default: Date.now, required: true },
   appointments: { type: [appointmentSchema] },
   additional_info: {},
-  field1: {type: String, default: ""},
-  field2: {type: String, default: ""}
+  label1: { type: String, default: ""},
+  label2: { type: String, default: ""},
+  field1: { type: String, default: "" },
+  field2: { type: String, default: "" }
 });
 
-
-const visitorListSchema = new Schema({
+var visitorListSchema = new Schema({
   company_id: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
-  visitors: { type: [visitorSchema], default: [] },
+  visitors: { type: [visitorSchema], default: [] }
 });
 
 module.exports = mongoose.model('visitorList', visitorListSchema);

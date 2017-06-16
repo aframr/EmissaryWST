@@ -1,10 +1,11 @@
+'use strict';
+
 /**
  * Main application routes
  */
 
-
 module.exports = function (app) {
-  const r = require;
+  var r = require;
   app.use(r('./routes/home'));
   app.use('/api/form', r('./routes/form'));
   app.use('/api', r('./routes/theme'));

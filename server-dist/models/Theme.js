@@ -1,6 +1,7 @@
 'use strict';
 
 // monggose set up
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

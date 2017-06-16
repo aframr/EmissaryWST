@@ -55,8 +55,8 @@ $(document).ready(() => {
       if (form_data.field4 != "Initial" && form_data.field4 != "NULL") {
         var newInput4 = document.createElement('input');
         newInput4.type = "text";
-        //newInput4.placeholder = form_data.field4;
-        newInput4.value = form_data.field4 + ": ";
+        newInput4.placeholder = form_data.field4;
+        //newInput4.value = form_data.field4 + " : ";
         newInput4.className = "visitor-fields";
         fieldNum += 1;
         newInput4.id = "field-"+fieldNum;
@@ -65,8 +65,8 @@ $(document).ready(() => {
       if (form_data.field5 != "Initial" && form_data.field5 != "NULL") {
         var newInput5 = document.createElement('input');
         newInput5.type = "text";
-        //newInput5.placeholder = form_data.field5;
-        newInput5.value = form_data.field5 + ": ";
+        newInput5.placeholder = form_data.field5;
+        //newInput5.value = form_data.field5 + " : ";
         newInput5.className = "visitor-fields";
         fieldNum += 1;
         newInput5.id = "field-"+fieldNum;
@@ -187,7 +187,10 @@ $(document).ready(() => {
         top: '35%',
         opacity: '0',
       }, 0);
+
+      location.reload();
     } else {
+      alert("Format Incorrect.");
       location.reload();
     }
   }
@@ -198,12 +201,17 @@ $(document).ready(() => {
     newVisitor.first_name = $('#visitor-first').val();
     newVisitor.last_name = $('#visitor-last').val();
     newVisitor.phone_number = $('#visitor-number').val();
+    newVisitor.label1 = "";
+    newVisitor.label2 = "";
     newVisitor.field1 = "";
     newVisitor.field2 = "";
     if (fieldNum >= 1) {
+      newVisitor.label1 = $('#field-1').attr("placeholder");
+      //alert($('#field-1').attr("placeholder"));
       newVisitor.field1 = $('#field-1').val();
     }
     if (fieldNum == 2) {
+      newVisitor.label2 = $('#field-2').attr("placeholder");
       newVisitor.field2 = $('#field-2').val();
     }
 

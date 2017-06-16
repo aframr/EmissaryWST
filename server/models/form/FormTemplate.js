@@ -1,19 +1,21 @@
+'use strict';
+
 /* Require mongoose to interact with mongoDB */
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 /**
  * This will be the Schema for the Form Template Documents.
  **/
-const formTemplate = new mongoose.Schema({
+var formTemplate = new mongoose.Schema({
   _admin_id: {
     type: Schema.Types.ObjectId,
     ref: 'Company',
-    required: true,
+    required: true
   },
   template: {
-    type: Object,
-  },
+    type: Object
+  }
 });
 
 module.exports = mongoose.model('FormTemplate', formTemplate);

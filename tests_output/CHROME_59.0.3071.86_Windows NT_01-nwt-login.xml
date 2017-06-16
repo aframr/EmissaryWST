@@ -5,9 +5,9 @@
 
   <testsuite name="01-nwt-login"
     errors="0" failures="0" hostname="" id="" package="01-nwt-login" skipped="0"
-    tests="1" time="35.15" timestamp="Fri, 16 Jun 2017 08:01:29 GMT">
+    tests="1" time="13.41" timestamp="Fri, 16 Jun 2017 10:30:05 GMT">
   
-    <testcase name="Login e2e Test Emissary" classname="01-nwt-login" time="35.15" assertions="3">
+    <testcase name="Login e2e Test Emissary" classname="01-nwt-login" time="13.41" assertions="3">
 
     
 
