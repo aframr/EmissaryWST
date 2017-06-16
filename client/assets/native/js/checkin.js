@@ -111,27 +111,73 @@ $(document).ready(() => {
     return form_data;
   }
 
+  //document.getElementById("visitor-first").addEventListener("change", visitorFirstWatcher);
+  //document.getElementById("visitor-last").addEventListener("change", visitorLastWatcher);
+  //document.getElementById("visitor-number").addEventListener("change", visitorPhoneWatcher);
+  
+  function visitorPhoneWatcher() {
+    const number = $('#visitor-number').val();
+    
+    if (!validateNumber(number)){
+      $('#visitor-number-warning').show();
+    } else{
+      $('#visitor-number-warning').hide();
+    }   
+  }
+    
+  function visitorFirstWatcher() {
+    const first = $('#visitor-first').val();
+
+    if (first == '') {
+      $('#visitor-first-warning').show();      
+    }else{
+      $('#visitor-first-warning').hide();
+    }
+  }
+
+  function visitorLastWatcher() {
+    const last = $('#visitor-last').val();    
+
+    if (last == '') {
+      $('#visitor-last-warning').show();      
+    }else{
+      $('#visitor-last-warning').hide();
+    }
+  }
+
+  function validateNumber(number) {
+    const re = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+    return re.test(number);
+
+  }
+
     // When a patient submits their form
   function submitForm() {
-        // event.preventDefault();
-    const data = grabFormElements();
-        // console.log(data.company_id);
-    if (localStorage.getItem('slackToken') && localStorage.getItem('slackChannel')) {
-      $.post('https://slack.com/api/chat.postMessage',
-        {
-          token: localStorage.getItem('slackToken'),
-          channel: localStorage.getItem('slackChannel'),
-          text: `Name: ${data.first_name} ${data.last_name} Phone Number: ${data.phone_number}`,
-        },
-             (data, status) => {
-             });
-    }
-    socket.emit(ADD_VISITOR, data);
+    const number = $('#visitor-number').val();
+    if(validateNumber(number)){
+          // event.preventDefault();
+      const data = grabFormElements();
+          // console.log(data.company_id);
+      if (localStorage.getItem('slackToken') && localStorage.getItem('slackChannel')) {
+        $.post('https://slack.com/api/chat.postMessage',
+          {
+            token: localStorage.getItem('slackToken'),
+            channel: localStorage.getItem('slackChannel'),
+            text: `Name: ${data.first_name} ${data.last_name} Phone Number: ${data.phone_number}`,
+          },
+               (data, status) => {
+               });
+      }
+      socket.emit(ADD_VISITOR, data);
 
-    $(this).animate({
-      top: '35%',
-      opacity: '0',
-    }, 0);
+      $(this).animate({
+        top: '35%',
+        opacity: '0',
+      }, 0);
+    }
+    else{
+      location.reload();     
+    }
   }
     // Grabs elements from the check in and puts it into an object
   function grabFormElements() {
