@@ -165,6 +165,7 @@ app.post('/hook', function (req, res) {
 
     try {
         var speech = 'empty speech';
+        console.log(req.body);
 
         if (req.body) {
             var requestBody = req.body;
@@ -203,39 +204,43 @@ app.post('/hook', function (req, res) {
 // 1.d case : delete
 // TODO: add given information to database or extract from database
 function handleReservation(request) {
-    params = request.result.parameters;
+    reqParams = request.result.parameters;
     console.log('request = ',request);
-    console.log('params = ',params);
-    sess_id = request.id;
+    console.log('params = ',reqParams);
+    sessId = request.id;
     response = "";
+    if (!reqParams)
+    {
+      return "Sorry, what was that?";
+    }
 
     // Edit Reservation
     if (request.result.action == "EditReservation.EditReservation-custom") {
-        phone_number = params["phone-number"];
-        new_appt_date = params["date"];
-        new_appt_time = params["time"];
+        phone_number = reqParams["phone-number"];
+        new_appt_date = reqParams["date"];
+        new_appt_time = reqParams["time"];
         response += phone_number + " " + new_appt_time + " " + new_appt_time;
     }
 
     // View Reservation
     else if (request.result.action == "ViewReservation.ViewReservation-custom") {
-        phone_number = params["phone-number"];
+        phone_number = reqParams["phone-number"];
         response += "Viewing...";
     }
 
     // Create Reservation
     else if (request.result.action == "CreateReservation.CreateReservation-custom") {
-        name = params["given-name"];
-        phone_number = params["phone-number"];
-        new_appt_date = params["date"];
-        new_appt_time = params["time"];
-        company = params["company"]; 
+        name = reqParams["given-name"];
+        phone_number = reqParams["phone-number"];
+        new_appt_date = reqParams["date"];
+        new_appt_time = reqParams["time"];
+        company = reqParams["company"]; 
         response += request.result.fulfillment.speech;
     }
 
     // Delete Reservation
     else if (request.result.action == "DeleteReservation.DeleteReservation-custom") {
-        phone_number = params["phone-number"];
+        phone_number = reqParams["phone-number"];
         response += request.result.fulfillment.speech;
     }
 
