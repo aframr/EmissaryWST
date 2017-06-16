@@ -1,27 +1,29 @@
-const chai = require('chai');
-const should = chai.should();
-const Theme = require('../models/Theme');
-const config = require('../config/config');
-const ConfigureAuth = require('./ConfigureAuth.js');
-const request = require('supertest');
 
-// Schema Test
-describe('Theme Settings Model', () => {
-  it('should create(POST) a new setting', (done) => {
-    const theme = new Theme({
-      user_id: 'test', // company or user id
-      form_color: 'default',
-      background_img: 'default',
-      displayPhone: false,
-      displayClock: false,
-      displaySignature: false,
-      additionalComments: false,
-    });
-    theme.save((err) => {
-      if (err) return done(err);
-      done();
-    });
-  });
+var chai = require('chai');
+var should = chai.should();
+var Theme = require('../models/Theme');
+var config = require('../config/config');
+var ConfigureAuth = require('./ConfigureAuth.js');
+var request = require('supertest');
+
+//Schema Test
+/*describe('Theme Settings Model', function() {
+    it('should create(POST) a new setting', function(done) {
+        var theme = new Theme({
+            user_id: "test", //company or user id
+            form_color: "default",
+            background_img: "default",
+            displayPhone: false,
+            displayClock: false,
+            displaySignature: false,
+            additionalComments: false
+        });
+        theme.save(function(err) {
+            if (err) return done(err);
+            done();
+        });
+    });*/
+
 
   /* it('should GET theme setting', function(done) {
         Theme.findOne({
@@ -38,29 +40,30 @@ describe('Theme Settings Model', () => {
         });
     });*/
 
-  it('should update(PUT) theme setting', (done) => {
-    Theme.findOne({
-      user_id: 'test',
-    }, (err, theme) => {
-      theme.user_id = 'test'; // company or user id
-      theme.form_color = 'default';
-      theme.background_img = 'default';
-      theme.displayPhone = false;
-      theme.displayClock = true;
-      theme.displaySignature = false;
-      theme.additionalComments = true;
-      theme.save((err) => {
-        if (err) return done(err);
-        theme.background_img.should.equal('default');
-        theme.form_color.should.equal('default');
-        theme.displayClock.should.equal(true);
-        theme.displayPhone.should.equal(false);
-        theme.displaySignature.should.equal(false);
-        theme.additionalComments.should.equal(true);
-        done();
-      });
-    });
-  });
+   /* it('should update(PUT) theme setting', function(done) {
+        Theme.findOne({
+            user_id: "test"
+        }, function(err, theme) {
+            theme.user_id = "test"; //company or user id
+            theme.form_color = "default";
+            theme.background_img = "default";
+            theme.displayPhone = false;
+            theme.displayClock = true;
+            theme.displaySignature = false;
+            theme.additionalComments = true;
+            theme.save(function(err) {
+                if (err) return done(err);
+                theme.background_img.should.equal('default');
+                theme.form_color.should.equal('default');
+                theme.displayClock.should.equal(true);
+                theme.displayPhone.should.equal(false);
+                theme.displaySignature.should.equal(false);
+                theme.additionalComments.should.equal(true);
+                done();
+            });
+        });
+    });*/
+
 
   /* it('should remove(DELETE) theme setting', function(done) {
         Theme.remove({
@@ -70,13 +73,36 @@ describe('Theme Settings Model', () => {
             theme.should.equal(1);
             done();
         });
-    });*/
+
+    });
+
+});*/
+
+//Route Tests need to be changed to work with auth
+
+/*describe("Themes Route Test", function() {
+        var credentials;  // variable to hold all the need authentication variables.
+
+        // before function is called at the very beginning of the 'Forms' test suite,
+        // no tests are run until the done() callback is called.
+        before(function(done) {
+            // setupAdmin will create and admin and log you in, give it a callback that will give you
+            // the credentials you need. Make sure to call done() inside ConfigureAuth's callback!
+            ConfigureAuth.setupAdmin(function(cred) {
+                credentials = cred;
+                done();
+            });
+        });
+
+    });
 });
 
 // Route Tests need to be changed to work with auth
 
+
 describe('Themes Route Test', () => {
   let credentials; // variable to hold all the need authentication variables.
+
 
   // before function is called at the very beginning of the 'Forms' test suite,
   // no tests are run until the done() callback is called.
@@ -130,6 +156,7 @@ describe('Themes Route Test', () => {
           res.body.additionalComments.should.equal(_additionalComments);
 
           done();
+>>>>>>> origin/develop
         });
     });
   });
@@ -213,12 +240,13 @@ describe('Themes Route Test', () => {
           done();
         });
     });
-  });
+  });*/
 
 
-  after((done) => {
+ /* after((done) => {
     // give cleanupAuth the email of the admin user it created earlier.
     ConfigureAuth.cleanupAuth(credentials.email, done);
   });
 },
-);
+);*/
+
