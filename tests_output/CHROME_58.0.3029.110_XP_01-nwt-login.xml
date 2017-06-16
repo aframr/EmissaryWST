@@ -5,9 +5,9 @@
 
   <testsuite name="01-nwt-login"
     errors="0" failures="0" hostname="" id="" package="01-nwt-login" skipped="0"
-    tests="1" time="8.758" timestamp="Thu, 15 Jun 2017 23:45:06 GMT">
+    tests="1" time="8.630" timestamp="Thu, 15 Jun 2017 23:49:27 GMT">
   
-    <testcase name="Login e2e Test Emissary" classname="01-nwt-login" time="8.758" assertions="3">
+    <testcase name="Login e2e Test Emissary" classname="01-nwt-login" time="8.630" assertions="3">
 
     
 
@@ -15,19 +15,6 @@
 
     
     </testcase>
-      <system-err>
-        ERROR: Unable to locate element: &quot;#logoutButton&quot; using: css selector
-    at Object.Login e2e Test Emissary (C:\Users\JID\Desktop\cse112\EmissaryWST\client\test\e2e\02-nwt-logout.js:15:5)
-    at Module.call (C:\Users\JID\Desktop\cse112\EmissaryWST\node_modules\nightwatch\lib\runner\module.js:62:34)
-    at C:\Users\JID\Desktop\cse112\EmissaryWST\node_modules\nightwatch\lib\runner\testcase.js:70:29
-    at _fulfilled (C:\Users\JID\Desktop\cse112\EmissaryWST\node_modules\nightwatch\node_modules\q\q.js:834:54)
-    at self.promiseDispatch.done (C:\Users\JID\Desktop\cse112\EmissaryWST\node_modules\nightwatch\node_modules\q\q.js:863:30)
-    at Promise.promise.promiseDispatch (C:\Users\JID\Desktop\cse112\EmissaryWST\node_modules\nightwatch\node_modules\q\q.js:796:13)
-    at C:\Users\JID\Desktop\cse112\EmissaryWST\node_modules\nightwatch\node_modules\q\q.js:556:49
-    at runSingle (C:\Users\JID\Desktop\cse112\EmissaryWST\node_modules\nightwatch\node_modules\q\q.js:137:13)
-    at flush (C:\Users\JID\Desktop\cse112\EmissaryWST\node_modules\nightwatch\node_modules\q\q.js:125:13)
-    at _combinedTickCallback (internal/process/next_tick.js:73:7)
-      </system-err>
   
   
   </testsuite>
