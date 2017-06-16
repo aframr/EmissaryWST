@@ -7,4 +7,8 @@ client/*
 !client/assets/native/**/*.js
 !client/assets/native/**/*.css
 
+server-dist/*
+
 dist/*
+gulp/*
+apidoc/*

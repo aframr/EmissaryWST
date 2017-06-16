@@ -17,7 +17,7 @@ gulp.task('serve:frontend', ['build:dev'], function () {
 * When any files change */
 gulp.task('frontend',['serve:frontend'], function() {
   gulp.watch('./client/bower_components', ['copy:bower-components', 'bower']);
-  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat:js', 'copy:views', 'bower']);
+  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat:js', 'copy:views', 'bower','copy:sw']);
   gulp.watch('./client/assets/**', ['copy:assets']);
   gulp.watch('./client/js/**',['copy:js']);
   gulp.watch('./client/css/**',['copy:css']);
