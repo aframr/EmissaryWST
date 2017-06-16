@@ -1,3 +1,4 @@
+
 $(document).ready(() => {
   const companyData = JSON.parse(localStorage.getItem('currentCompany'));
   const myCompanyId = companyData._id;
@@ -16,6 +17,74 @@ $(document).ready(() => {
     }
     return appts;
   }
+
+  document.getElementById("appt-first").addEventListener("change", appFirstWatcher);
+  document.getElementById("appt-last").addEventListener("change", appLastWatcher);
+  document.getElementById("appt-number").addEventListener("change", appNumberWatcher);
+  document.getElementById("appt-provider").addEventListener("change", appProviderWatcher);
+  document.getElementById("appt-date").addEventListener("change", appDateWatcher);
+  document.getElementById("appt-time").addEventListener("change", appTimeWatcher);
+
+  function appFirstWatcher() {
+    const appFirst = $('#appt-first').val();
+
+    if (appFirst == '') {
+      $('#app-first-warning').show();      
+    }else{
+      $('#app-first-warning').hide();
+    }
+  }
+
+  function appLastWatcher() {
+    const appLast = $('#appt-last').val();
+
+    if (appFirst == '') {
+      $('#app-last-warning').show();      
+    }else{
+      $('#app-last-warning').hide();
+    }
+  }
+
+  function appProviderWatcher() {
+    const appProvider = $('#appt-provider').val();
+
+    if (appProvider == '') {
+      $('#app-provider-warning').show();      
+    }else{
+      $('#app-provider-warning').hide();
+    }
+  }
+
+  function appNumberWatcher() {
+    const appNumber = $('#appt-number').val();
+
+    if (!validateNumber(appNumber)) {
+      $('#app-number-warning').show();      
+    }else{
+      $('#app-number-warning').hide();
+    }
+  }
+
+  function appDateWatcher() {
+    const appDate = $('#appt-date').val();
+
+    if (!isValidDate(appDate)) {
+      $('#app-date-warning').show();      
+    }else{
+      $('#app-date-warning').hide();
+    }
+  }
+
+  function appTimeWatcher() {
+    const appTime = $('#appt-time').val();
+
+    if (!checkTime(appTime)) {
+      $('#app-time-warning').show();      
+    }else{
+      $('#app-time-warning').hide();
+    }
+  }
+
 
   appts = initializeAppts(appts);
   const source = $('#appt-list-template').html();
@@ -52,13 +121,16 @@ $(document).ready(() => {
      * @returns updates the appt list
      */
   function submitForm() {
-    const d = grabFormElements();
-    console.log(d);
-    updateApptList(d);
-    appts = getAppts();
-    appts = initializeAppts(appts);
-    $('#appt-list').html(template(appts));
-    document.getElementById('appt-form').reset();
+    const appNumber = $('#appt-number').val();
+    const appTime = $('#appt-time').val();
+    const appDate = $('#appt-date').val();
+      const d = grabFormElements();
+      console.log(d);
+      updateApptList(d);
+      appts = getAppts();
+      appts = initializeAppts(appts);
+      $('#appt-list').html(template(appts));
+      document.getElementById('appt-form').reset();      
   }
 
     /** *
@@ -80,6 +152,84 @@ $(document).ready(() => {
     });
   }
 
+  function validateNumber(number) {
+    const re = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+    return re.test(number);
+  }
+
+  function checkTime(field)
+  {
+    var errorMsg = "";
+
+    // regular expression to match required time format
+    const re = /^(\d{1,2}):(\d{2})(:00)?([ap]m)?$/;
+
+    if(field != '') {
+      if(regs = field.match(re)) {
+        if(regs[4]) {
+          // 12-hour time format with am/pm
+          if(regs[1] < 1 || regs[1] > 12) {
+            errorMsg = "Invalid value for hours: " + regs[1];
+          }
+        } else {
+          // 24-hour time format
+          if(regs[1] > 23) {
+            errorMsg = "Invalid value for hours: " + regs[1];
+          }
+        }
+        if(!errorMsg && regs[2] > 59) {
+          errorMsg = "Invalid value for minutes: " + regs[2];
+        }
+      } else {
+        errorMsg = "Invalid time format: " + field;
+      }
+    }
+
+    if(errorMsg != "") {
+      //alert(errorMsg);
+      return false;
+    }
+
+    return true;
+  }
+
+  function isValidDate(date) { // (mm/dd/yyyy)
+    let match = null;
+    if (!(typeof (date) === 'string')) {
+      return false;
+    }
+
+    match = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+
+    if (match == null) {
+      match = date.match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/);
+      if (match == null) {
+        return false;
+      }
+    }
+
+    const validDate = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const year = match[3];
+    const month = match[1];
+    const day = match[2];
+
+    if (year < 0 || day <= 0 || month <= 0 || month > 12) {
+      return false;
+    }
+
+    if (year % 4 === 0) {
+      if (year % 100 !== 0) {
+        validDate[1] = 29;
+      } else if (year % 100 === 0 && year % 400 === 0) {
+        validDate[1] = 29;
+      }
+    }
+
+    if (day <= validDate[month - 1]) {
+      return true;
+    }
+    return false;
+  }
 
     /** *
      * Grabs elements from the check in and puts it into an object
