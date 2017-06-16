@@ -34,7 +34,7 @@ gulp.task('minify:js', ['ng-annotate'], function() {
 });
 
 /* Build the app without minification */
-gulp.task('build:dev', ['dist']);
+gulp.task('build:dev', ['dist', 'nightwatch:test']);
 
 /* Build the app and minfy */
 gulp.task('build:prod', ['dist', 'minify:js', /*'minify:css',*/ 'htmlify']);
