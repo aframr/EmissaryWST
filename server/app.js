@@ -203,39 +203,43 @@ app.post('/hook', function (req, res) {
 // 1.d case : delete
 // TODO: add given information to database or extract from database
 function handleReservation(request) {
-    params = request.result.parameters;
+    req_params = request.result.parameters;
     console.log('request = ',request);
-    console.log('params = ',params);
+    console.log('params = ',req_params);
     sess_id = request.id;
     response = "";
+    if (!req_params)
+    {
+      return "Sorry, what was that?";
+    }
 
     // Edit Reservation
     if (request.result.action == "EditReservation.EditReservation-custom") {
-        phone_number = params["phone-number"];
-        new_appt_date = params["date"];
-        new_appt_time = params["time"];
+        phone_number = req_params["phone-number"];
+        new_appt_date = req_params["date"];
+        new_appt_time = req_params["time"];
         response += phone_number + " " + new_appt_time + " " + new_appt_time;
     }
 
     // View Reservation
     else if (request.result.action == "ViewReservation.ViewReservation-custom") {
-        phone_number = params["phone-number"];
+        phone_number = req_params["phone-number"];
         response += "Viewing...";
     }
 
     // Create Reservation
     else if (request.result.action == "CreateReservation.CreateReservation-custom") {
-        name = params["given-name"];
-        phone_number = params["phone-number"];
-        new_appt_date = params["date"];
-        new_appt_time = params["time"];
-        company = params["company"]; 
+        name = req_params["given-name"];
+        phone_number = req_params["phone-number"];
+        new_appt_date = req_params["date"];
+        new_appt_time = req_params["time"];
+        company = req_params["company"]; 
         response += request.result.fulfillment.speech;
     }
 
     // Delete Reservation
     else if (request.result.action == "DeleteReservation.DeleteReservation-custom") {
-        phone_number = params["phone-number"];
+        phone_number = req_params["phone-number"];
         response += request.result.fulfillment.speech;
     }
 
