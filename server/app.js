@@ -165,6 +165,7 @@ app.post('/hook', function (req, res) {
 
     try {
         var speech = 'empty speech';
+        console.log(req.body);
 
         if (req.body) {
             var requestBody = req.body;
@@ -203,9 +204,9 @@ app.post('/hook', function (req, res) {
 // 1.d case : delete
 // TODO: add given information to database or extract from database
 function handleReservation(request) {
-    req_params = request.result.parameters;
     console.log('request = ',request);
     console.log('params = ',req_params);
+    req_params = request.result.parameters;
     sess_id = request.id;
     response = "";
     if (!req_params)
