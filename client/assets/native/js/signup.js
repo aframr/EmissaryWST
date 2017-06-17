@@ -27,6 +27,8 @@ $(document).ready(() => {
     }
   });
 
+  $('#submit-btn').click(createInitialForm);
+
   let company_Name;
   // Grab Company Data from form
   function grabCompanyData() {
@@ -82,8 +84,8 @@ $(document).ready(() => {
   }
 
   function createInitialForm() {
-    const form_data = {};
-    form_data.user_id = companyId;
+    const form_data = creatForm();
+
     $.ajax({
       dataType: 'json',
       type: 'POST', //create
@@ -94,6 +96,17 @@ $(document).ready(() => {
         console.log ("Initial theme is saved.");
       },
     });
+  }
+
+  function creatForm () {
+    const form_data = {};
+    form_data.user_id = companyId;
+    form_data.form_color = "F9C800";
+    form_data.field1 = "First Name";
+    form_data.field2 = "Last Name";
+    form_data.field3 = "Phone Number";
+
+    return form_data;
   }
 
   function validateCompany() {
